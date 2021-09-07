@@ -1,4 +1,4 @@
-import {darken, lighten} from 'polished';
+import { darken, lighten } from 'polished';
 
 const primary = '#F96D00';
 const secondary = '#222831';

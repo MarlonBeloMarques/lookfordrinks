@@ -1,4 +1,4 @@
-import {moderateScale} from 'react-native-size-matters';
+import { moderateScale } from 'react-native-size-matters';
 
 export default {
   baseSpacing: moderateScale(16),

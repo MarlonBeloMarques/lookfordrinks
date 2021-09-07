@@ -9,7 +9,7 @@
  */
 
 import React from 'react';
-import {StatusBar, StyleSheet, Text, View} from 'react-native';
+import { StatusBar, StyleSheet, Text, View } from 'react-native';
 
 const App = () => {
   return (
