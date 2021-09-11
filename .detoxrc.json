@@ -1,0 +1,41 @@
+{
+  "testRunner": "jest",
+  "runnerConfig": "e2e/config.json",
+  "skipLegacyWorkersInjection": true,
+  "apps": {
+    "ios": {
+      "type": "ios.app"
+    },
+    "android.debug": {
+      "type": "android.apk",
+      "binaryPath": "android/app/build/outputs/apk/debug/app-debug.apk",
+      "build": "cd android && ./gradlew assembleDebug assembleAndroidTest -DtestBuildType=debug && cd .."
+    }
+  },
+  "devices": {
+    "simulator": {
+      "type": "ios.simulator",
+      "device": {
+        "type": "iPhone 12"
+      }
+    },
+    "emulator": {
+      "type": "android.emulator",
+      "device": {
+        "avdName": "Pixel_2_API_30"
+      }
+    }
+  },
+  "configurations": {
+    "ios.debug": {
+      "binaryPath": "ios/build/LookForDrinks/Build/Products/Debug-iphonesimulator/LookForDrinks.app",
+      "build": "xcodebuild -workspace ios/LookForDrinks.xcworkspace -configuration Debug -scheme LookForDrinks -sdk iphonesimulator -derivedDataPath ios/build/LookForDrinks",
+      "type": "ios.simulator",
+      "name": "iPhone 12"
+    },
+    "android.debug": {
+      "device": "emulator",
+      "app": "android.debug"
+    }
+  }
+}
