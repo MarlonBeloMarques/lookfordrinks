@@ -7,8 +7,8 @@
     "android:prod": "adb reverse tcp:9090 tcp:9090 && ENVFILE=.env.prod && npx react-native run-android",
     "ios": "npx pod-install && ENVFILE=.env.dev && npx react-native run-ios",
     "ios:prod": "npx pod-install && ENVFILE=.env.prod && npx react-native run-ios",
-    "start": "ENVFILE=.env.dev npx react-native start --reset-cache",
-    "start:prod": "ENVFILE=.env.prod npx react-native start --reset-cache",
+    "start": "ENVFILE=.env.dev npx react-native start -- --reset-cache",
+    "start:prod": "ENVFILE=.env.prod npx react-native start -- --reset-cache",
     "test": "jest --coverage",
     "testRunner": "jest-circus/runner",
     "lint": "eslint '*/**/*.{js,jsx,ts,tsx}' --fix",
@@ -32,6 +32,7 @@
     "react": "17.0.2",
     "react-native": "0.65.1",
     "react-native-config": "^1.4.4",
+    "react-native-flash-message": "^0.1.23",
     "react-native-size-matters": "^0.4.0"
   },
   "devDependencies": {
