@@ -60,3 +60,7 @@ buck-out/
 
 #tests
 /coverage
+
+#firebase
+GoogleService-Info.plist
+google-services.json
