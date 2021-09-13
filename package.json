@@ -3,13 +3,13 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "android": "adb reverse tcp:9090 tcp:9090 && ENVFILE=.env.dev && npx react-native run-android",
-    "android:prod": "adb reverse tcp:9090 tcp:9090 && ENVFILE=.env.prod && npx react-native run-android",
-    "ios": "npx pod-install && ENVFILE=.env.dev && npx react-native run-ios",
-    "ios:prod": "npx pod-install && ENVFILE=.env.prod && npx react-native run-ios",
+    "android": "adb reverse tcp:9090 tcp:9090 && ENVFILE=.env.dev && npx react-native run-android --variant=developmentdebug",
+    "android:prod": "adb reverse tcp:9090 tcp:9090 && ENVFILE=.env.prod && npx react-native run-android --variant=productiondebug",
+    "ios": "npx pod-install && ENVFILE=.env.dev npx react-native run-ios --scheme='LookForDrinksDev'",
+    "ios:prod": "npx pod-install && ENVFILE=.env.prod npx react-native run-ios --scheme='LookForDrinksProd'",
     "start": "ENVFILE=.env.dev npx react-native start -- --reset-cache",
     "start:prod": "ENVFILE=.env.prod npx react-native start -- --reset-cache",
-    "test": "jest --coverage",
+    "test": "jest",
     "testRunner": "jest-circus/runner",
     "lint": "eslint '*/**/*.{js,jsx,ts,tsx}' --fix",
     "pretty": "prettier --config ./.prettierrc.js --write \"src/**/*.{js,jsx,ts,tsx,json}\"",
@@ -26,6 +26,7 @@
     ]
   },
   "dependencies": {
+    "@react-native-firebase/analytics": "^12.7.5",
     "@react-native-firebase/app": "^12.7.5",
     "axios": "^0.21.4",
     "cz-conventional-changelog": "^3.3.0",
@@ -41,6 +42,7 @@
     "@babel/core": "^7.12.9",
     "@babel/runtime": "^7.12.5",
     "@react-native-community/eslint-config": "^2.0.0",
+    "@testing-library/react-native": "^7.2.0",
     "@types/jest": "^26.0.23",
     "@types/react-native": "^0.64.5",
     "@types/react-test-renderer": "^16.9.2",
@@ -78,6 +80,9 @@
   "jest": {
     "preset": "react-native",
     "verbose": true,
+    "setupFilesAfterEnv": [
+      "@testing-library/jest-native/extend-expect"
+    ],
     "moduleFileExtensions": [
       "ts",
       "tsx",

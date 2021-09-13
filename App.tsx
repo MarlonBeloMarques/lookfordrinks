@@ -8,13 +8,20 @@
  * @format
  */
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import { StatusBar, StyleSheet, Text, View } from 'react-native';
+import { ToastMessage } from '~/utils';
+import { AnalyticsService } from '~/services';
 
 const App = () => {
+  useEffect(() => {
+    AnalyticsService.logScreen('App');
+  }, []);
+
   return (
     <View style={styles.view}>
       <StatusBar barStyle="dark-content" />
+      <ToastMessage position="top" />
       <Text style={styles.text}>LOOK FOR DRINKS</Text>
     </View>
   );
