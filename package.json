@@ -22,7 +22,7 @@
     "**/*.ts?(x)": [
       "yarn lint",
       "yarn pretty",
-      "yarn test --findRelatedTests"
+      "yarn test --bail --coverage --findRelatedTests"
     ]
   },
   "dependencies": {
