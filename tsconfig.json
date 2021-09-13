@@ -35,7 +35,7 @@
     "resolveJsonModule": true                 /* Allows importing modules with a ‘.json’ extension, which is a common practice in node projects. */
   },
   "types": ["./types/*"],                           /* Type declaration files to be included in compilation. */
-  "include": ["src/**/*", "App.tsx"],
+  "include": ["src/**/*", "App.tsx", "CodePush.tsx"],
   "exclude": [
     "node_modules", "babel.config.js", "metro.config.js", "jest.config.js", "__tests__/", "e2e"
   ]

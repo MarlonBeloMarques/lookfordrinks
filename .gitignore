@@ -64,3 +64,6 @@ buck-out/
 #firebase
 GoogleService-Info.plist
 google-services.json
+
+# react-native-config codegen
+ios/tmp.xcconfig
