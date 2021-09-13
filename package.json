@@ -28,6 +28,7 @@
   "dependencies": {
     "@react-native-firebase/analytics": "^12.7.5",
     "@react-native-firebase/app": "^12.7.5",
+    "@react-native-firebase/crashlytics": "^12.7.5",
     "axios": "^0.21.4",
     "cz-conventional-changelog": "^3.3.0",
     "jest-circus": "^27.1.1",

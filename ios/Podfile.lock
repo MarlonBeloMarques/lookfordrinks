@@ -17,6 +17,9 @@ PODS:
     - FirebaseAnalytics (~> 8.6.0)
   - Firebase/CoreOnly (8.6.0):
     - FirebaseCore (= 8.6.0)
+  - Firebase/Crashlytics (8.6.0):
+    - Firebase/CoreOnly
+    - FirebaseCrashlytics (~> 8.6.0)
   - FirebaseAnalytics (8.6.0):
     - FirebaseAnalytics/AdIdSupport (= 8.6.0)
     - FirebaseCore (~> 8.0)
@@ -44,6 +47,13 @@ PODS:
     - GoogleUtilities/Environment (~> 7.4)
     - GoogleUtilities/Logger (~> 7.4)
     - nanopb (~> 2.30908.0)
+  - FirebaseCrashlytics (8.6.0):
+    - FirebaseCore (~> 8.0)
+    - FirebaseInstallations (~> 8.0)
+    - GoogleDataTransport (~> 9.0)
+    - GoogleUtilities/Environment (~> 7.4)
+    - nanopb (~> 2.30908.0)
+    - PromisesObjC (< 3.0, >= 1.2)
   - FirebaseInstallations (8.6.0):
     - FirebaseCore (~> 8.0)
     - GoogleUtilities/Environment (~> 7.4)
@@ -425,6 +435,10 @@ PODS:
   - RNFBApp (12.7.5):
     - Firebase/CoreOnly (= 8.6.0)
     - React-Core
+  - RNFBCrashlytics (12.7.5):
+    - Firebase/Crashlytics (= 8.6.0)
+    - React-Core
+    - RNFBApp
   - Yoga (1.14.0)
   - YogaKit (1.18.1):
     - Yoga (~> 1.14)
@@ -484,6 +498,7 @@ DEPENDENCIES:
   - ReactCommon/turbomodule/core (from `../node_modules/react-native/ReactCommon`)
   - "RNFBAnalytics (from `../node_modules/@react-native-firebase/analytics`)"
   - "RNFBApp (from `../node_modules/@react-native-firebase/app`)"
+  - "RNFBCrashlytics (from `../node_modules/@react-native-firebase/crashlytics`)"
   - Yoga (from `../node_modules/react-native/ReactCommon/yoga`)
 
 SPEC REPOS:
@@ -494,6 +509,7 @@ SPEC REPOS:
     - FirebaseAnalytics
     - FirebaseCore
     - FirebaseCoreDiagnostics
+    - FirebaseCrashlytics
     - FirebaseInstallations
     - Flipper
     - Flipper-Boost-iOSX
@@ -575,6 +591,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/@react-native-firebase/analytics"
   RNFBApp:
     :path: "../node_modules/@react-native-firebase/app"
+  RNFBCrashlytics:
+    :path: "../node_modules/@react-native-firebase/crashlytics"
   Yoga:
     :path: "../node_modules/react-native/ReactCommon/yoga"
 
@@ -588,6 +606,7 @@ SPEC CHECKSUMS:
   FirebaseAnalytics: 8f32ae54ad42754f503354782575c4ddfc1425c3
   FirebaseCore: 620b677f70f5470a8e59cb77f3ddc666f6f09785
   FirebaseCoreDiagnostics: 3721920bde3a9a6d5aa093c1d25e9d3e47f694af
+  FirebaseCrashlytics: 58f8ecea7c799c61c50e8111d2e438424a8a1d2e
   FirebaseInstallations: 0ede6ffcd215b8f93c19d9b06c1c54e2d4107e98
   Flipper: b1fddf9a17c32097b2b4c806ad158b2f36bb2692
   Flipper-Boost-iOSX: fd1e2b8cbef7e662a122412d7ac5f5bea715403c
@@ -633,6 +652,7 @@ SPEC CHECKSUMS:
   ReactCommon: eafed38eec7b591c31751bfa7494801618460459
   RNFBAnalytics: ae8f44a8b706379d8af6b14b0c4d2f8c13ff1fa9
   RNFBApp: 46a6918f6b1bbb0b332fafb07ef1362bd96ca857
+  RNFBCrashlytics: d7ee415dd19b1fe2981214cbe4d1fbd457730886
   Yoga: aa0cb45287ebe1004c02a13f279c55a95f1572f4
   YogaKit: f782866e155069a2cca2517aafea43200b01fd5a
 
