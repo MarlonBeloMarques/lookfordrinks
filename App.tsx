@@ -15,7 +15,7 @@ import { ThemeProvider } from 'styled-components/native';
 import { ToastMessage, getTheme } from '~/utils';
 import { AnalyticsService } from '~/services';
 import theme from '~/themes';
-import { Button, Icon, Input, Text } from '~/components';
+import { Button, Icon, Image, Input, Text } from '~/components';
 import CodePush from './CodePush';
 
 const codePushOptions: CodePushOptions = {
@@ -38,6 +38,17 @@ const App = () => {
         <StatusBar barStyle="dark-content" />
         <ToastMessage position="top" />
         <CodePush />
+        <Image
+          width={150}
+          height={150}
+          source={
+            'https://www.petlove.com.br/images/products/208498/product/Cerveja_Dog_Beer_sem_%C3%81lcool_Sabor_Carne_para_C%C3%A3es_-_335_mL_2319540.jpg?1627668387'
+          }
+          style={{
+            alignSelf: 'center',
+            margin: 10,
+          }}
+        />
         <View style={styles.row}>
           <Text weight="bold">LOOK FOR DRINKS</Text>
           <Icon
