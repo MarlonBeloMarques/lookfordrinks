@@ -447,6 +447,8 @@ PODS:
     - Firebase/Crashlytics (= 8.6.0)
     - React-Core
     - RNFBApp
+  - RNVectorIcons (8.1.0):
+    - React-Core
   - SSZipArchive (2.2.3)
   - Yoga (1.14.0)
   - YogaKit (1.18.1):
@@ -509,6 +511,7 @@ DEPENDENCIES:
   - "RNFBAnalytics (from `../node_modules/@react-native-firebase/analytics`)"
   - "RNFBApp (from `../node_modules/@react-native-firebase/app`)"
   - "RNFBCrashlytics (from `../node_modules/@react-native-firebase/crashlytics`)"
+  - RNVectorIcons (from `../node_modules/react-native-vector-icons`)
   - Yoga (from `../node_modules/react-native/ReactCommon/yoga`)
 
 SPEC REPOS:
@@ -608,6 +611,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/@react-native-firebase/app"
   RNFBCrashlytics:
     :path: "../node_modules/@react-native-firebase/crashlytics"
+  RNVectorIcons:
+    :path: "../node_modules/react-native-vector-icons"
   Yoga:
     :path: "../node_modules/react-native/ReactCommon/yoga"
 
@@ -671,10 +676,11 @@ SPEC CHECKSUMS:
   RNFBAnalytics: ae8f44a8b706379d8af6b14b0c4d2f8c13ff1fa9
   RNFBApp: 46a6918f6b1bbb0b332fafb07ef1362bd96ca857
   RNFBCrashlytics: d7ee415dd19b1fe2981214cbe4d1fbd457730886
+  RNVectorIcons: 31cebfcf94e8cf8686eb5303ae0357da64d7a5a4
   SSZipArchive: 62d4947b08730e4cda640473b0066d209ff033c9
   Yoga: aa0cb45287ebe1004c02a13f279c55a95f1572f4
   YogaKit: f782866e155069a2cca2517aafea43200b01fd5a
 
-PODFILE CHECKSUM: 56ce9d4ab7f004cea74ee04028426e4350a41cc0
+PODFILE CHECKSUM: 9fc1f62bdcbfa249bc6cd53daa61a5c059c5f28c
 
 COCOAPODS: 1.10.1

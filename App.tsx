@@ -15,7 +15,7 @@ import { ThemeProvider } from 'styled-components/native';
 import { ToastMessage, getTheme } from '~/utils';
 import { AnalyticsService } from '~/services';
 import theme from '~/themes';
-import { Button, Text } from '~/components';
+import { Button, Icon, Text } from '~/components';
 import CodePush from './CodePush';
 
 const codePushOptions: CodePushOptions = {
@@ -33,7 +33,15 @@ const App = () => {
         <StatusBar barStyle="dark-content" />
         <ToastMessage position="top" />
         <CodePush />
-        <Text weight="bold">LOOK FOR DRINKS</Text>
+        <View style={styles.row}>
+          <Text weight="bold">LOOK FOR DRINKS</Text>
+          <Icon
+            fontFamily="MaterialIcons"
+            name="star"
+            size={18}
+            color="primary"
+          />
+        </View>
         <Button onPress={() => {}}>LETS GO</Button>
       </ThemeProvider>
     </View>
@@ -45,6 +53,11 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     margin: getTheme('sceneSpacing'),
+  },
+  row: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 });
 
