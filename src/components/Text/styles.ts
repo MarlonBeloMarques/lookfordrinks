@@ -1,13 +1,6 @@
 import styled from 'styled-components/native';
 import { colors, typography } from '~/themes';
-import { getTheme } from '~/utils';
-
-export const fontWeights = {
-  normal: 'normal',
-  bold: 'bold',
-  light: '200',
-  medium: '500',
-};
+import { fontWeights, getColors, getTheme } from '~/utils';
 
 const getFontSize = (variant: keyof typeof typography) =>
   `${getTheme(variant).fontSize}px`;
@@ -22,7 +15,7 @@ interface Props {
 }
 
 export const Typography = styled.Text<Props>`
-  color: ${({ color, theme }) => theme[color]};
+  color: ${({ color }) => getColors(color)};
   font-size: ${({ variant }) => getFontSize(variant)};
   line-height: ${({ variant }) => getLineHeight(variant)};
   text-align: ${({ align }) => align};
