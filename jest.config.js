@@ -26,5 +26,6 @@ module.exports = {
     './__mocks__/react-native-firebase.ts',
     './__mocks__/react-native-config.ts',
     './__mocks__/react-native-flash-message.tsx',
+    './__mocks__/react-native-vector-icons.ts',
   ],
 };

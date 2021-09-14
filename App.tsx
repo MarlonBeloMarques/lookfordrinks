@@ -8,14 +8,14 @@
  * @format
  */
 
-import React, { useEffect } from 'react';
-import { StatusBar, StyleSheet, View } from 'react-native';
+import React, { useEffect, useRef, useState } from 'react';
+import { StatusBar, StyleSheet, TextInput, View } from 'react-native';
 import codePush, { CodePushOptions } from 'react-native-code-push';
 import { ThemeProvider } from 'styled-components/native';
 import { ToastMessage, getTheme } from '~/utils';
 import { AnalyticsService } from '~/services';
 import theme from '~/themes';
-import { Button, Icon, Text } from '~/components';
+import { Button, Icon, Input, Text } from '~/components';
 import CodePush from './CodePush';
 
 const codePushOptions: CodePushOptions = {
@@ -23,6 +23,11 @@ const codePushOptions: CodePushOptions = {
 };
 
 const App = () => {
+  const [name, setName] = useState('');
+  const [password, setPassword] = useState('');
+
+  const passwordRef = useRef<TextInput>();
+
   useEffect(() => {
     AnalyticsService.logScreen('App');
   }, []);
@@ -42,6 +47,19 @@ const App = () => {
             color="primary"
           />
         </View>
+        <Input
+          placeholder="Your name"
+          value={name}
+          onChangeText={setName}
+          onSubmitEditing={() => passwordRef.current?.focus()}
+        />
+        <Input
+          ref={passwordRef}
+          placeholder="Your password"
+          isSecure
+          value={password}
+          onChangeText={setPassword}
+        />
         <Button onPress={() => {}}>LETS GO</Button>
       </ThemeProvider>
     </View>
