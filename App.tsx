@@ -9,10 +9,13 @@
  */
 
 import React, { useEffect } from 'react';
-import { StatusBar, StyleSheet, Text, View } from 'react-native';
+import { StatusBar, StyleSheet, View } from 'react-native';
 import codePush, { CodePushOptions } from 'react-native-code-push';
+import { ThemeProvider } from 'styled-components/native';
 import { ToastMessage } from '~/utils';
 import { AnalyticsService } from '~/services';
+import theme from '~/themes';
+import { Text } from '~/components';
 import CodePush from './CodePush';
 
 const codePushOptions: CodePushOptions = {
@@ -26,18 +29,17 @@ const App = () => {
 
   return (
     <View style={styles.view}>
-      <StatusBar barStyle="dark-content" />
-      <ToastMessage position="top" />
-      <CodePush />
-      <Text style={styles.text}>LOOK FOR DRINKS</Text>
+      <ThemeProvider theme={theme}>
+        <StatusBar barStyle="dark-content" />
+        <ToastMessage position="top" />
+        <CodePush />
+        <Text weight="bold">LOOK FOR DRINKS</Text>
+      </ThemeProvider>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  text: {
-    fontWeight: 'bold',
-  },
   view: {
     flex: 1,
     justifyContent: 'center',

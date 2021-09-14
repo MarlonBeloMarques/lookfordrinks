@@ -14,10 +14,14 @@ module.exports = {
   collectCoverageFrom: [
     'src/**/*.{js,jsx,ts,tsx}',
     '!src/services/**',
-    '!src/utils/helpers/*',
-    '!src/utils/hooks/*',
     '!src/themes/**',
+    '!src/api/request.ts',
+    '!src/**/*.d.ts',
   ],
+  transformIgnorePatterns: [
+    'node_modules/(?!(@react-native|react-native|react-native-size-matters)/)',
+  ],
+  modulePathIgnorePatterns: ['helpers'],
   setupFiles: [
     './__mocks__/react-native-firebase.ts',
     './__mocks__/react-native-config.ts',
