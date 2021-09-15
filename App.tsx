@@ -25,12 +25,17 @@ const codePushOptions: CodePushOptions = {
 const App = () => {
   const [name, setName] = useState('');
   const [password, setPassword] = useState('');
+  const [submiting, setSubmiting] = useState(false);
 
   const passwordRef = useRef<TextInput>();
 
   useEffect(() => {
     AnalyticsService.logScreen('App');
   }, []);
+
+  const handleSubmit = () => {
+    setSubmiting(true);
+  };
 
   return (
     <View style={styles.view}>
@@ -59,6 +64,7 @@ const App = () => {
           />
         </View>
         <Input
+          id="name_id"
           placeholder="Your name"
           value={name}
           onChangeText={setName}
@@ -66,12 +72,15 @@ const App = () => {
         />
         <Input
           ref={passwordRef}
+          id="password_id"
           placeholder="Your password"
           isSecure
           value={password}
           onChangeText={setPassword}
         />
-        <Button onPress={() => {}}>LETS GO</Button>
+        <Button submiting={submiting} onPress={handleSubmit}>
+          LETS GO
+        </Button>
       </ThemeProvider>
     </View>
   );

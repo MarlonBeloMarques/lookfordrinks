@@ -1,4 +1,4 @@
-describe('Example', () => {
+describe('Login flow', () => {
   beforeAll(async () => {
     await device.launchApp();
   });
@@ -7,7 +7,10 @@ describe('Example', () => {
     await device.reloadReactNative();
   });
 
-  it('should have welcome screen', async () => {
-    await expect(element(by.text('LOOK FOR DRINKS'))).toBeVisible();
+  test('should login successfully', async () => {
+    await element(by.id('name_id')).typeText('marlon.belohd@example.com');
+    await element(by.id('password_id')).typeText('123456\n');
+    await element(by.text('LETS GO')).tap();
+    await expect(element(by.text('LETS GO'))).toNotExist();
   });
 });

@@ -8,8 +8,8 @@
     },
     "android.debug": {
       "type": "android.apk",
-      "binaryPath": "android/app/build/outputs/apk/debug/app-debug.apk",
-      "build": "cd android && ./gradlew assembleDebug assembleAndroidTest -DtestBuildType=debug && cd .."
+      "binaryPath": "android/app/build/outputs/apk/development/debug/app-development-debug.apk",
+      "build": "cd android && ENVFILE=.env.dev ./gradlew assembleDevelopmentdebug assembleAndroidTest -DtestBuildType=debug && cd .."
     }
   },
   "devices": {
@@ -29,7 +29,7 @@
   "configurations": {
     "ios.debug": {
       "binaryPath": "ios/build/LookForDrinks/Build/Products/Debug-iphonesimulator/LookForDrinks.app",
-      "build": "xcodebuild -workspace ios/LookForDrinks.xcworkspace -configuration Debug -scheme LookForDrinks -sdk iphonesimulator -derivedDataPath ios/build/LookForDrinks",
+      "build": "ENVFILE=.env.dev xcodebuild -workspace ios/LookForDrinks.xcworkspace -configuration Debug -scheme LookForDrinksDev -sdk iphonesimulator -derivedDataPath ios/build/LookForDrinks",
       "type": "ios.simulator",
       "name": "iPhone 12"
     },
