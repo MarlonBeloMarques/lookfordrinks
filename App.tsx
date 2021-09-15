@@ -9,13 +9,13 @@
  */
 
 import React, { useEffect, useRef, useState } from 'react';
-import { StatusBar, StyleSheet, TextInput, View } from 'react-native';
+import { StatusBar, StyleSheet, TextInput } from 'react-native';
 import codePush, { CodePushOptions } from 'react-native-code-push';
 import { ThemeProvider } from 'styled-components/native';
 import { ToastMessage, getTheme } from '~/utils';
 import { AnalyticsService } from '~/services';
 import theme from '~/themes';
-import { Button, Icon, Image, Input, Text } from '~/components';
+import { Block, Button, Icon, Image, Input, Text } from '~/components';
 import CodePush from './CodePush';
 
 const codePushOptions: CodePushOptions = {
@@ -38,7 +38,7 @@ const App = () => {
   };
 
   return (
-    <View style={styles.view}>
+    <Block middle style={styles.view}>
       <ThemeProvider theme={theme}>
         <StatusBar barStyle="dark-content" />
         <ToastMessage position="top" />
@@ -54,7 +54,7 @@ const App = () => {
             margin: 10,
           }}
         />
-        <View style={styles.row}>
+        <Block row center middle flex={false}>
           <Text weight="bold">LOOK FOR DRINKS</Text>
           <Icon
             fontFamily="MaterialIcons"
@@ -62,7 +62,7 @@ const App = () => {
             size={18}
             color="primary"
           />
-        </View>
+        </Block>
         <Input
           id="name_id"
           placeholder="Your name"
@@ -82,20 +82,13 @@ const App = () => {
           LETS GO
         </Button>
       </ThemeProvider>
-    </View>
+    </Block>
   );
 };
 
 const styles = StyleSheet.create({
   view: {
-    flex: 1,
-    justifyContent: 'center',
     margin: getTheme('sceneSpacing'),
-  },
-  row: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
   },
 });
 

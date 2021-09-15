@@ -13,8 +13,11 @@ module.exports = {
   },
   collectCoverageFrom: [
     'src/**/*.{js,jsx,ts,tsx}',
+    '!src/**/index.{js,ts}',
     '!src/services/**',
     '!src/themes/**',
+    '!src/assets/**',
+    '!src/utils/enums/*',
     '!src/api/request.ts',
     '!src/**/*.d.ts',
   ],

@@ -24,6 +24,5 @@ export const ButtonToggle = styled.TouchableOpacity.attrs({
   justify-content: center;
   align-items: center;
   top: ${moderateScale(12)}px;
-  /* border-width: 1px; */
-  background-color: ${({ theme }) => theme['white']};
+  background-color: transparent;
 `;

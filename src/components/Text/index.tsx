@@ -1,6 +1,7 @@
 import React, { FC, ReactNode } from 'react';
 import { colors, typography } from '~/themes';
-import { Typography, fontWeights } from './styles';
+import { fontWeights } from '~/utils';
+import { Typography } from './styles';
 
 type Props = {
   variant?: keyof typeof typography | undefined;
