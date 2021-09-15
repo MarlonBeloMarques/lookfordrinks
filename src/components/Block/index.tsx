@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import { LayoutChangeEvent, StyleProp, ViewStyle } from 'react-native';
 import { colors } from '~/themes';
 import { getColors } from '~/utils';
-import { View } from './styles';
+import { View, ViewAnimated } from './styles';
 
 type Props = {
   id?: string;
@@ -24,6 +24,7 @@ type Props = {
   absolute?: boolean;
   fullBorder?: boolean;
   onLayout?: ((event: LayoutChangeEvent) => void) | undefined;
+  animated?: boolean;
 };
 
 const Block: FC<Props> = ({
@@ -47,8 +48,38 @@ const Block: FC<Props> = ({
   fullBorder = false,
   onLayout,
   children,
+  animated = false,
   ...rest
 }) => {
+  if (animated) {
+    return (
+      <ViewAnimated
+        {...rest}
+        zIndex={zIndex}
+        testID={id}
+        flex={flex}
+        row={row}
+        column={column}
+        style={style}
+        center={center}
+        middle={middle}
+        left={left}
+        right={right}
+        top={top}
+        bottom={bottom}
+        width={width}
+        height={height}
+        color={getColors(color)}
+        space={space}
+        absolute={absolute}
+        fullBorder={fullBorder}
+        onLayout={onLayout}
+      >
+        {children}
+      </ViewAnimated>
+    );
+  }
+
   return (
     <View
       {...rest}

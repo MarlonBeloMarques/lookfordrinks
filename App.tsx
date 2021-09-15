@@ -54,7 +54,7 @@ const App = () => {
             margin: 10,
           }}
         />
-        <Block row center middle flex={false}>
+        <Block animated row center middle flex={false}>
           <Text weight="bold">LOOK FOR DRINKS</Text>
           <Icon
             fontFamily="MaterialIcons"
