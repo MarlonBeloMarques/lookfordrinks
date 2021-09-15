@@ -1,14 +1,17 @@
-import React, { FC, ReactNode } from 'react';
+import React, { FC } from 'react';
+import { StyleProp, TextStyle } from 'react-native';
 import { colors, typography } from '~/themes';
 import { fontWeights } from '~/utils';
-import { Typography } from './styles';
+import { Typography, TypographyAnimated } from './styles';
 
 type Props = {
-  variant?: keyof typeof typography | undefined;
-  weight?: keyof typeof fontWeights | undefined;
-  color?: keyof typeof colors | undefined;
-  align?: 'center' | 'right' | 'left' | undefined;
-  children?: ReactNode;
+  id?: string;
+  variant?: keyof typeof typography;
+  weight?: keyof typeof fontWeights;
+  color?: keyof typeof colors;
+  align?: 'center' | 'right' | 'left';
+  style?: StyleProp<TextStyle>;
+  animated?: boolean;
 };
 
 const Text: FC<Props> = ({
@@ -17,14 +20,35 @@ const Text: FC<Props> = ({
   weight = 'normal',
   color = 'text',
   align = 'center',
+  animated = false,
+  style = {},
+  id,
   ...rest
 }) => {
+  if (animated) {
+    return (
+      <TypographyAnimated
+        testID={id}
+        variant={variant}
+        align={align}
+        color={color}
+        weight={weight}
+        style={style}
+        {...rest}
+      >
+        {children}
+      </TypographyAnimated>
+    );
+  }
+
   return (
     <Typography
+      testID={id}
       variant={variant}
       align={align}
       color={color}
       weight={weight}
+      style={style}
       {...rest}
     >
       {children}

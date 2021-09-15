@@ -1,3 +1,4 @@
+import Animated from 'react-native-reanimated';
 import styled from 'styled-components/native';
 import { colors, typography } from '~/themes';
 import { fontWeights, getColors, getTheme } from '~/utils';
@@ -15,6 +16,14 @@ interface Props {
 }
 
 export const Typography = styled.Text<Props>`
+  color: ${({ color }) => getColors(color)};
+  font-size: ${({ variant }) => getFontSize(variant)};
+  line-height: ${({ variant }) => getLineHeight(variant)};
+  text-align: ${({ align }) => align};
+  font-weight: ${({ weight }) => fontWeights[weight]};
+`;
+
+export const TypographyAnimated = styled(Animated.Text)<Props>`
   color: ${({ color }) => getColors(color)};
   font-size: ${({ variant }) => getFontSize(variant)};
   line-height: ${({ variant }) => getLineHeight(variant)};
