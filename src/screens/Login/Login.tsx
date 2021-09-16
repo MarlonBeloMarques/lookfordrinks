@@ -58,6 +58,7 @@ const Login: FC<Props> = ({
         isSecure
         value={password}
         onChangeText={setPassword}
+        onSubmitEditing={handleSubmit}
       />
       <Button submiting={submiting} onPress={handleSubmit}>
         LETS GO

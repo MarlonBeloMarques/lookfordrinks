@@ -16,6 +16,7 @@ export {
   default as ToastMessage,
   showMessage as DisplayToast,
 } from 'react-native-flash-message';
+export { default as AsyncStorage } from '@react-native-async-storage/async-storage';
 
 export const Icons = {
   AntDesign,

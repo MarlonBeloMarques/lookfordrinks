@@ -31,5 +31,6 @@ module.exports = {
     './__mocks__/react-native-config.ts',
     './__mocks__/react-native-flash-message.tsx',
     './__mocks__/react-native-vector-icons.ts',
+    './__mocks__/@react-native-async-storage/async-storage.ts',
   ],
 };

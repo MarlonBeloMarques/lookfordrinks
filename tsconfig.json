@@ -10,6 +10,7 @@
     "isolatedModules": true,                  /* Transpile each file as a separate module (similar to 'ts.transpileModule'). */
     /* Strict Type-Checking Options */
     "strict": true,                           /* Enable all strict type-checking options. */
+    "experimentalDecorators": true,
     /* Module Resolution Options */
     "moduleResolution": "node",               /* Specify module resolution strategy: 'node' (Node.js) or 'classic' (TypeScript pre-1.6). */
     "baseUrl": ".",                       /* Base directory to resolve non-absolute module names. */
@@ -19,6 +20,12 @@
       ],
       "~/services": [
         "src/services"
+      ],
+      "~/stores": [
+        "src/stores"
+      ],
+      "~/api": [
+        "src/api"
       ],
       "~/themes": [
         "src/themes"

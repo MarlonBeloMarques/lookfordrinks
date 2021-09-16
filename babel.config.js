@@ -11,5 +11,6 @@ module.exports = {
       },
     ],
     ['babel-plugin-root-import', { rootPathSuffix: 'src' }],
+    ['@babel/plugin-proposal-decorators', { legacy: true }],
   ],
 };

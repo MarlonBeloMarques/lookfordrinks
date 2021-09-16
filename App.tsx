@@ -10,6 +10,7 @@
 
 import React, { useEffect } from 'react';
 import { StatusBar } from 'react-native';
+import { Provider } from 'mobx-react';
 import codePush, { CodePushOptions } from 'react-native-code-push';
 import { ThemeProvider } from 'styled-components/native';
 import { NavigationContainerRef } from '@react-navigation/core';
@@ -18,6 +19,7 @@ import { AnalyticsService } from '~/services';
 import theme from '~/themes';
 import { Block } from '~/components';
 import { Navigation, NavigationActions } from '~/navigation';
+import store from '~/stores';
 import CodePush from './CodePush';
 
 const codePushOptions: CodePushOptions = {
@@ -30,18 +32,20 @@ const App = () => {
   }, []);
 
   return (
-    <Block>
-      <ThemeProvider theme={theme}>
-        <StatusBar barStyle="dark-content" />
-        <ToastMessage position="top" />
-        <CodePush />
-        <Navigation
-          setNavigationTop={(navigatorRef: NavigationContainerRef<any>) =>
-            NavigationActions.setTopLevelNavigator(navigatorRef)
-          }
-        />
-      </ThemeProvider>
-    </Block>
+    <Provider {...store}>
+      <Block>
+        <ThemeProvider theme={theme}>
+          <StatusBar barStyle="dark-content" />
+          <ToastMessage position="top" />
+          <CodePush />
+          <Navigation
+            setNavigationTop={(navigatorRef: NavigationContainerRef<any>) =>
+              NavigationActions.setTopLevelNavigator(navigatorRef)
+            }
+          />
+        </ThemeProvider>
+      </Block>
+    </Provider>
   );
 };
 
