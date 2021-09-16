@@ -5,7 +5,7 @@ import {
   LayoutChangeEvent,
   StyleProp,
 } from 'react-native';
-import { Photo } from './styles';
+import { Photo, PhotoAnimated } from './styles';
 
 type Props = {
   id?: string;
@@ -16,6 +16,7 @@ type Props = {
   imageRef?: any;
   source: string | ImageURISource;
   resizeMode?: 'cover' | 'contain' | 'stretch' | 'repeat' | 'center';
+  animated?: boolean;
 };
 
 const Image: FC<Props> = ({
@@ -26,8 +27,22 @@ const Image: FC<Props> = ({
   onLayout,
   source,
   resizeMode,
+  animated = false,
   ...rest
 }) => {
+  if (animated) {
+    return (
+      <PhotoAnimated
+        {...rest}
+        testID={id}
+        resizeMode={resizeMode}
+        onLayout={onLayout}
+        style={[style, { width: width, height: height }]}
+        source={typeof source === 'string' ? { uri: source } : source}
+      />
+    );
+  }
+
   return (
     <Photo
       {...rest}
