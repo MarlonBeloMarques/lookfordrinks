@@ -372,6 +372,8 @@ PODS:
     - react-native-config/App (= 1.4.4)
   - react-native-config/App (1.4.4):
     - React-Core
+  - react-native-safe-area-context (3.3.2):
+    - React-Core
   - React-perflogger (0.65.1)
   - React-RCTActionSheet (0.65.1):
     - React-Core/RCTActionSheetHeaders (= 0.65.1)
@@ -447,6 +449,8 @@ PODS:
     - Firebase/Crashlytics (= 8.6.0)
     - React-Core
     - RNFBApp
+  - RNGestureHandler (1.10.3):
+    - React-Core
   - RNReanimated (2.3.0-alpha.2):
     - DoubleConversion
     - FBLazyVector
@@ -476,6 +480,9 @@ PODS:
     - React-RCTVibration
     - ReactCommon/turbomodule/core
     - Yoga
+  - RNScreens (3.7.2):
+    - React-Core
+    - React-RCTImage
   - RNVectorIcons (8.1.0):
     - React-Core
   - SSZipArchive (2.2.3)
@@ -525,6 +532,7 @@ DEPENDENCIES:
   - React-jsiexecutor (from `../node_modules/react-native/ReactCommon/jsiexecutor`)
   - React-jsinspector (from `../node_modules/react-native/ReactCommon/jsinspector`)
   - react-native-config (from `../node_modules/react-native-config`)
+  - react-native-safe-area-context (from `../node_modules/react-native-safe-area-context`)
   - React-perflogger (from `../node_modules/react-native/ReactCommon/reactperflogger`)
   - React-RCTActionSheet (from `../node_modules/react-native/Libraries/ActionSheetIOS`)
   - React-RCTAnimation (from `../node_modules/react-native/Libraries/NativeAnimation`)
@@ -540,7 +548,9 @@ DEPENDENCIES:
   - "RNFBAnalytics (from `../node_modules/@react-native-firebase/analytics`)"
   - "RNFBApp (from `../node_modules/@react-native-firebase/app`)"
   - "RNFBCrashlytics (from `../node_modules/@react-native-firebase/crashlytics`)"
+  - RNGestureHandler (from `../node_modules/react-native-gesture-handler`)
   - RNReanimated (from `../node_modules/react-native-reanimated`)
+  - RNScreens (from `../node_modules/react-native-screens`)
   - RNVectorIcons (from `../node_modules/react-native-vector-icons`)
   - Yoga (from `../node_modules/react-native/ReactCommon/yoga`)
 
@@ -611,6 +621,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon/jsinspector"
   react-native-config:
     :path: "../node_modules/react-native-config"
+  react-native-safe-area-context:
+    :path: "../node_modules/react-native-safe-area-context"
   React-perflogger:
     :path: "../node_modules/react-native/ReactCommon/reactperflogger"
   React-RCTActionSheet:
@@ -641,8 +653,12 @@ EXTERNAL SOURCES:
     :path: "../node_modules/@react-native-firebase/app"
   RNFBCrashlytics:
     :path: "../node_modules/@react-native-firebase/crashlytics"
+  RNGestureHandler:
+    :path: "../node_modules/react-native-gesture-handler"
   RNReanimated:
     :path: "../node_modules/react-native-reanimated"
+  RNScreens:
+    :path: "../node_modules/react-native-screens"
   RNVectorIcons:
     :path: "../node_modules/react-native-vector-icons"
   Yoga:
@@ -693,6 +709,7 @@ SPEC CHECKSUMS:
   React-jsiexecutor: 43f2542aed3c26e42175b339f8d37fe3dd683765
   React-jsinspector: 41e58e5b8e3e0bf061fdf725b03f2144014a8fb0
   react-native-config: 72d948053a442779b3178fddd571e37f118ef606
+  react-native-safe-area-context: 584dc04881deb49474363f3be89e4ca0e854c057
   React-perflogger: fd28ee1f2b5b150b00043f0301d96bd417fdc339
   React-RCTActionSheet: 7f3fa0855c346aa5d7c60f9ced16e067db6d29fa
   React-RCTAnimation: 2119a18ee26159004b001bc56404ca5dbaae6077
@@ -708,7 +725,9 @@ SPEC CHECKSUMS:
   RNFBAnalytics: ae8f44a8b706379d8af6b14b0c4d2f8c13ff1fa9
   RNFBApp: 46a6918f6b1bbb0b332fafb07ef1362bd96ca857
   RNFBCrashlytics: d7ee415dd19b1fe2981214cbe4d1fbd457730886
+  RNGestureHandler: a479ebd5ed4221a810967000735517df0d2db211
   RNReanimated: f89561404f0efaa5352b627dc35e5a97a845a2cd
+  RNScreens: 0591543e343c7444ea1756b6265d81a4295922c9
   RNVectorIcons: 31cebfcf94e8cf8686eb5303ae0357da64d7a5a4
   SSZipArchive: 62d4947b08730e4cda640473b0066d209ff033c9
   Yoga: aa0cb45287ebe1004c02a13f279c55a95f1572f4

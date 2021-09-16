@@ -22,13 +22,16 @@
     "**/*.ts?(x)": [
       "yarn lint",
       "yarn pretty",
-      "yarn test --coverage --findRelatedTests --bail"
+      "yarn test --coverageThreshold '{}' --findRelatedTests --bail"
     ]
   },
   "dependencies": {
     "@react-native-firebase/analytics": "^12.7.5",
     "@react-native-firebase/app": "^12.7.5",
     "@react-native-firebase/crashlytics": "^12.7.5",
+    "@react-navigation/core": "^6.0.1",
+    "@react-navigation/native": "^6.0.2",
+    "@react-navigation/stack": "^6.0.7",
     "@types/styled-components-react-native": "^5.1.1",
     "axios": "^0.21.4",
     "cz-conventional-changelog": "^3.3.0",
@@ -39,7 +42,10 @@
     "react-native-code-push": "^7.0.2",
     "react-native-config": "^1.4.4",
     "react-native-flash-message": "^0.1.23",
+    "react-native-gesture-handler": "^1.10.3",
     "react-native-reanimated": "2.3.0-alpha.2",
+    "react-native-safe-area-context": "^3.3.2",
+    "react-native-screens": "^3.7.2",
     "react-native-size-matters": "^0.4.0",
     "react-native-vector-icons": "^8.1.0",
     "styled-components": "^5.3.1"

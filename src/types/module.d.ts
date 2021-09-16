@@ -1,8 +1,14 @@
 import { Icons } from '~/utils';
 import { colors } from '~/themes';
+import { Routes } from '~/navigation';
 
 declare global {
   namespace Modules {
-    export { Icons, colors };
+    export { Routes, Icons, colors };
+  }
+  namespace ReactNavigation {
+    interface RootParamList {
+      LOGIN: string;
+    }
   }
 }

@@ -17,6 +17,8 @@ module.exports = {
     '!src/services/**',
     '!src/themes/**',
     '!src/assets/**',
+    '!src/navigation/**',
+    '!src/screens/**',
     '!src/utils/enums/*',
     '!src/api/request.ts',
     '!src/**/*.d.ts',
