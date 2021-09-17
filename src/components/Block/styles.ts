@@ -3,15 +3,15 @@ import styled from 'styled-components/native';
 
 type Props = {
   zIndex?: number;
-  flex: number | boolean;
+  isFlex: number | boolean;
   row: boolean;
   column: boolean;
   center: boolean;
   middle: boolean;
-  left: boolean;
-  right: boolean;
-  top: boolean;
-  bottom: boolean;
+  isLeft: boolean;
+  isRight: boolean;
+  isTop: boolean;
+  isBottom: boolean;
   width?: number;
   height?: number;
   color?: string;
@@ -34,15 +34,15 @@ export const View = styled.View<Props>`
   flex-direction: ${({ row, column }) => getFlexDirection(row, column)};
   background-color: ${({ color }) => (color ? color : 'transparent')};
 
-  ${({ flex }) => typeof flex === 'boolean' && flex && `flex: 1`}
-  ${({ flex }) => typeof flex === 'number' && `flex: ${flex}`}
+  ${({ isFlex }) => typeof isFlex === 'boolean' && isFlex && `flex: 1`}
+  ${({ isFlex }) => typeof isFlex === 'number' && `flex: ${isFlex}`}
   ${({ absolute }) => absolute && `position: absolute`}
   ${({ center }) => center && `align-items: center`}
   ${({ middle }) => middle && `justify-content: center`}
-  ${({ left }) => left && `justify-content: flex-start`}
-  ${({ right }) => right && `justify-content: flex-end`}
-  ${({ top }) => top && `justify-content: flex-start`}
-  ${({ bottom }) => bottom && `justify-content: flex-end`}
+  ${({ isLeft }) => isLeft && `justify-content: flex-start`}
+  ${({ isRight }) => isRight && `justify-content: flex-end`}
+  ${({ isTop }) => isTop && `justify-content: flex-start`}
+  ${({ isBottom }) => isBottom && `justify-content: flex-end`}
   ${({ space }) => space && `justify-content: space-${space}`}
   ${({ fullBorder }) => fullBorder && `border-width: 1px`}
   ${({ zIndex }) => zIndex && `z-index: ${zIndex}`}
@@ -54,15 +54,15 @@ export const ViewAnimated = styled(Animated.View)<Props>`
   flex-direction: ${({ row, column }) => getFlexDirection(row, column)};
   background-color: ${({ color }) => (color ? color : 'transparent')};
 
-  ${({ flex }) => typeof flex === 'boolean' && flex && `flex: 1`}
-  ${({ flex }) => typeof flex === 'number' && `flex: ${flex}`}
+  ${({ isFlex }) => typeof isFlex === 'boolean' && isFlex && `flex: 1`}
+  ${({ isFlex }) => typeof isFlex === 'number' && `flex: ${isFlex}`}
   ${({ absolute }) => absolute && `position: absolute`}
   ${({ center }) => center && `align-items: center`}
   ${({ middle }) => middle && `justify-content: center`}
-  ${({ left }) => left && `justify-content: flex-start`}
-  ${({ right }) => right && `justify-content: flex-end`}
-  ${({ top }) => top && `justify-content: flex-start`}
-  ${({ bottom }) => bottom && `justify-content: flex-end`}
+  ${({ isLeft }) => isLeft && `justify-content: flex-start`}
+  ${({ isRight }) => isRight && `justify-content: flex-end`}
+  ${({ isTop }) => isTop && `justify-content: flex-start`}
+  ${({ isBottom }) => isBottom && `justify-content: flex-end`}
   ${({ space }) => space && `justify-content: space-${space}`}
   ${({ fullBorder }) => fullBorder && `border-width: 1px`}
   ${({ zIndex }) => zIndex && `z-index: ${zIndex}`}
