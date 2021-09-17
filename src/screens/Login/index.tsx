@@ -1,9 +1,11 @@
-import React, { FC, useRef, useState } from 'react';
+import React, { FC, useRef } from 'react';
 import { inject, observer } from 'mobx-react';
+import { FormikHelpers } from 'formik';
 import { TextInput } from 'react-native';
 import { UserStore } from '~/stores';
-import { useAlerts } from '~/utils';
+import { FormikBehavior, useAlerts } from '~/utils';
 import Login from './Login';
+import { FormValues, initialValues, validationSchema } from './form';
 
 type Props = {
   user: UserStore;
@@ -12,31 +14,35 @@ type Props = {
 const LoginContainer: FC<Props> = ({ user }) => {
   const { showError } = useAlerts();
 
-  const [name, setName] = useState('');
-  const [password, setPassword] = useState('');
-  const [submiting, setSubmiting] = useState(false);
-
   const passwordRef = useRef<TextInput>();
 
-  const handleSubmit = async () => {
+  const submit = async (
+    values: FormValues,
+    setSubmitting: (isSubmitting: boolean) => void,
+  ) => {
+    setSubmitting(true);
     try {
-      setSubmiting(true);
-      await user.login({ name, password });
+      await user.login(values);
     } catch (error) {
       showError('message error');
     }
   };
 
+  const onSubmit = (
+    values: FormValues,
+    { setSubmitting }: FormikHelpers<FormValues>,
+  ) => {
+    submit(values, setSubmitting);
+  };
+
   return (
-    <Login
-      name={name}
-      password={password}
-      setName={setName}
-      setPassword={setPassword}
-      handleSubmit={handleSubmit}
-      submiting={submiting}
-      passwordRef={passwordRef}
-    />
+    <FormikBehavior
+      initialValues={initialValues}
+      validationSchema={validationSchema}
+      onSubmit={onSubmit}
+    >
+      <Login passwordRef={passwordRef} />
+    </FormikBehavior>
   );
 };
 

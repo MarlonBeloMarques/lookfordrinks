@@ -36,6 +36,7 @@
     "@types/styled-components-react-native": "^5.1.1",
     "axios": "^0.21.4",
     "cz-conventional-changelog": "^3.3.0",
+    "formik": "^2.2.9",
     "jest-circus": "^27.1.1",
     "mobx": "^6.3.3",
     "mobx-persist": "^0.4.1",
@@ -52,7 +53,8 @@
     "react-native-screens": "^3.7.2",
     "react-native-size-matters": "^0.4.0",
     "react-native-vector-icons": "^8.1.0",
-    "styled-components": "^5.3.1"
+    "styled-components": "^5.3.1",
+    "yup": "^0.32.9"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",

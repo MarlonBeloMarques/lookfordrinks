@@ -1,27 +1,24 @@
-import React, { Dispatch, FC, MutableRefObject, SetStateAction } from 'react';
+import React, { FC, MutableRefObject } from 'react';
+import { FormikProps, useFormikContext } from 'formik';
 import { StyleSheet, TextInput } from 'react-native';
 import { Block, Button, Icon, Image, Input, Text } from '~/components';
 import { getTheme } from '~/utils';
+import { FormValues } from './form';
 
 type Props = {
-  name: string;
-  setName: Dispatch<SetStateAction<string>>;
-  password: string;
-  setPassword: Dispatch<SetStateAction<string>>;
   passwordRef: MutableRefObject<TextInput | undefined>;
-  submiting: boolean;
-  handleSubmit: () => void;
 };
 
-const Login: FC<Props> = ({
-  name,
-  setName,
-  password,
-  setPassword,
-  passwordRef,
-  submiting,
-  handleSubmit,
-}) => {
+const Login: FC<Props> = ({ passwordRef }) => {
+  const {
+    submitForm,
+    values,
+    errors,
+    touched,
+    isSubmitting,
+    handleChange,
+  }: FormikProps<FormValues> = useFormikContext();
+
   return (
     <Block middle style={styles.view}>
       <Image
@@ -47,8 +44,9 @@ const Login: FC<Props> = ({
       <Input
         id="name_id"
         placeholder="Your name"
-        value={name}
-        onChangeText={setName}
+        value={values.name}
+        error={touched?.name && errors?.name}
+        onChangeText={handleChange('name')}
         onSubmitEditing={() => passwordRef.current?.focus()}
       />
       <Input
@@ -56,11 +54,12 @@ const Login: FC<Props> = ({
         id="password_id"
         placeholder="Your password"
         isSecure
-        value={password}
-        onChangeText={setPassword}
-        onSubmitEditing={handleSubmit}
+        value={values.password}
+        error={touched?.password && errors?.password}
+        onChangeText={handleChange('password')}
+        onSubmitEditing={submitForm}
       />
-      <Button submiting={submiting} onPress={handleSubmit}>
+      <Button submiting={isSubmitting} onPress={submitForm}>
         LETS GO
       </Button>
     </Block>
