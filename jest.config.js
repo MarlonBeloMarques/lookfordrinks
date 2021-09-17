@@ -21,6 +21,7 @@ module.exports = {
     '!src/screens/**',
     '!src/utils/enums/*',
     '!src/api/request.ts',
+    '!src/stores/*',
     '!src/**/*.d.ts',
   ],
   transformIgnorePatterns: [],
