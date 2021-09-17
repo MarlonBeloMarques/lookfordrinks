@@ -13,6 +13,7 @@ import { StatusBar } from 'react-native';
 import { Provider } from 'mobx-react';
 import codePush, { CodePushOptions } from 'react-native-code-push';
 import { ThemeProvider } from 'styled-components/native';
+import SplashScreen from 'react-native-splash-screen';
 import { NavigationContainerRef } from '@react-navigation/core';
 import { ToastMessage } from '~/utils';
 import { AnalyticsService } from '~/services';
@@ -28,6 +29,7 @@ const codePushOptions: CodePushOptions = {
 
 const App = () => {
   useEffect(() => {
+    SplashScreen.hide();
     AnalyticsService.logScreen('App');
   }, []);
 
