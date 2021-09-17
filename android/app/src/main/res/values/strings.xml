@@ -1,4 +1,4 @@
 <resources>
     <string name="app_name">LookForDrinks</string>
-    <string moduleConfig="true" name="CodePushDeploymentKey">project.env.get("CODE_PUSH_KEY_ANDROID")</string>
+    <string moduleConfig="true" name="CodePushDeploymentKey">@string/CODE_PUSH_KEY_ANDROID</string>
 </resources>
