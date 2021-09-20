@@ -1,5 +1,5 @@
 import React, { FC, memo } from 'react';
-import { ActivityIndicator, Button as B } from 'react-native';
+import { ActivityIndicator } from 'react-native';
 import { colors, typography } from '~/themes';
 import { fontWeights, getTheme } from '~/utils';
 import { Text, Touchable } from './styles';
