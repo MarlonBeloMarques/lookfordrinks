@@ -1,5 +1,5 @@
-import React, { FC } from 'react';
-import { ActivityIndicator } from 'react-native';
+import React, { FC, memo } from 'react';
+import { ActivityIndicator, Button as B } from 'react-native';
 import { colors, typography } from '~/themes';
 import { fontWeights, getTheme } from '~/utils';
 import { Text, Touchable } from './styles';
@@ -14,6 +14,7 @@ type Props = {
   id?: string;
   onPress: () => void;
   submiting?: boolean;
+  children?: React.ReactNode;
 };
 
 const Button: FC<Props> = ({
@@ -46,4 +47,4 @@ const Button: FC<Props> = ({
   );
 };
 
-export default Button;
+export default memo(Button);

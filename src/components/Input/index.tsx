@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { memo, useState } from 'react';
 import { moderateScale } from 'react-native-size-matters';
 import {
   KeyboardTypeOptions,
@@ -125,6 +125,8 @@ const TextInput: React.FC<Props> = ({
   );
 };
 
-export default React.forwardRef((props: Props, ref) => (
+const TextInputRef = React.forwardRef((props: Props, ref) => (
   <TextInput {...props} inputRef={ref} />
 ));
+
+export default memo(TextInputRef);
