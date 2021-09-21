@@ -13,7 +13,8 @@
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		543F6C3326F007A500B81C4F /* Config.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 543F6C3226F007A500B81C4F /* Config.xcconfig */; };
 		543F6C3426F007A500B81C4F /* Config.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 543F6C3226F007A500B81C4F /* Config.xcconfig */; };
-		54579F7526EE9F5B0023B841 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 54579F7426EE9F5B0023B841 /* GoogleService-Info.plist */; };
+		54793BE026FA0CF000F0D004 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 54793BDF26FA0CEF00F0D004 /* GoogleService-Info.plist */; };
+		54793BE126FA0CF000F0D004 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 54793BDF26FA0CEF00F0D004 /* GoogleService-Info.plist */; };
 		6172F2D35A4C3AA820D92908 /* libPods-LookForDrinks.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6423831EA8574132BED9D8CC /* libPods-LookForDrinks.a */; };
 		7EF68E3733C33B6898317E18 /* libPods-LookForDrinks-LookForDrinksTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ABFE59519B596E51CEFDCCC0 /* libPods-LookForDrinks-LookForDrinksTests.a */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
@@ -47,7 +48,7 @@
 		25D1827C3FED43B38D310C85 /* FontAwesome5_Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Regular.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Regular.ttf"; sourceTree = "<group>"; };
 		2908201BC3B140E3AFFB4AD5 /* SimpleLineIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = SimpleLineIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/SimpleLineIcons.ttf"; sourceTree = "<group>"; };
 		543F6C3226F007A500B81C4F /* Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
-		54579F7426EE9F5B0023B841 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		54793BDF26FA0CEF00F0D004 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		59534F68FC6C41888082C370 /* Ionicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Ionicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Ionicons.ttf"; sourceTree = "<group>"; };
 		5A79082A5A1D4BBE9220C503 /* Fontisto.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Fontisto.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Fontisto.ttf"; sourceTree = "<group>"; };
 		6423831EA8574132BED9D8CC /* libPods-LookForDrinks.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-LookForDrinks.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -137,8 +138,8 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				54793BDF26FA0CEF00F0D004 /* GoogleService-Info.plist */,
 				543F6C3226F007A500B81C4F /* Config.xcconfig */,
-				54579F7426EE9F5B0023B841 /* GoogleService-Info.plist */,
 				13B07FAE1A68108700A75B9A /* LookForDrinks */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				00E356EF1AD99517003FC87E /* LookForDrinksTests */,
@@ -285,6 +286,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				543F6C3426F007A500B81C4F /* Config.xcconfig in Resources */,
+				54793BE126FA0CF000F0D004 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -293,9 +295,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				543F6C3326F007A500B81C4F /* Config.xcconfig in Resources */,
+				54793BE026FA0CF000F0D004 /* GoogleService-Info.plist in Resources */,
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
-				54579F7526EE9F5B0023B841 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -586,7 +588,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.marlonmarques.lookfordrinks;
 				PRODUCT_NAME = LookForDrinks;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -615,7 +617,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.marlonmarques.lookfordrinks;
 				PRODUCT_NAME = LookForDrinks;
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
