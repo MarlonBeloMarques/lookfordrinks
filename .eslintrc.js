@@ -24,7 +24,7 @@ module.exports = {
     'promise',
     'import',
   ],
-  ignorePatterns: ['node_modules/', 'e2e', '__mocks__', '__tests__'],
+  ignorePatterns: ['node_modules/', 'e2e', '__mocks__'],
   rules: {
     'react/jsx-filename-extension': ['error', {extensions: ['.jsx', '.tsx']}],
     'react/prop-types': 0,

@@ -1,18 +1,18 @@
 import React from 'react';
-import Text from '../Text';
-import Block from '../Block';
-import { renderWithTheme } from './helpers/renderWithTheme';
 import {
   useAnimatedStyle,
   useSharedValue,
   withTiming,
 } from 'react-native-reanimated';
 import { Button } from 'react-native';
-import { fireEvent } from '@testing-library/react-native';
 import {
   advanceAnimationByTime,
   withReanimatedTimer,
 } from 'react-native-reanimated/src/reanimated2/jestUtils';
+import { fireEvent } from '@testing-library/react-native';
+import Text from '../Text';
+import Block from '../Block';
+import { renderWithTheme } from './helpers/renderWithTheme';
 
 interface AnimatedBlockProps {
   sharedValue: { value: number };

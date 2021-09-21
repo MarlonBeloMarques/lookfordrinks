@@ -1,4 +1,3 @@
-import { fireEvent } from '@testing-library/react-native';
 import React from 'react';
 import { Button } from 'react-native';
 import {
@@ -10,6 +9,7 @@ import {
   advanceAnimationByTime,
   withReanimatedTimer,
 } from 'react-native-reanimated/src/reanimated2/jestUtils';
+import { fireEvent } from '@testing-library/react-native';
 import Block from '../Block';
 import Text from '../Text';
 import { renderWithTheme } from './helpers/renderWithTheme';

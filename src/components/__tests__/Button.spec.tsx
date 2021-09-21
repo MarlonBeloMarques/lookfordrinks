@@ -1,6 +1,6 @@
-import { fireEvent } from '@testing-library/react-native';
 import React from 'react';
 import { ActivityIndicator } from 'react-native';
+import { fireEvent } from '@testing-library/react-native';
 import Button from '../Button';
 import { renderWithTheme } from './helpers/renderWithTheme';
 
