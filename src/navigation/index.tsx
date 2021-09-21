@@ -12,7 +12,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { NavigationState, PartialState } from '@react-navigation/routers';
 import { AnalyticsService } from '~/services';
 import { getColors } from '~/utils';
-import { LoginScreen } from '~/screens';
+import { LoginScreen, WelcomeScreen } from '~/screens';
 import * as NavigationActions from './actions';
 import { Routes } from './routes';
 
@@ -67,11 +67,16 @@ export const Navigation: React.FC<Props> = ({ setNavigationTop }) => {
       theme={contextTheme}
       onStateChange={onNavigationStateChange}
     >
-      <MainStack.Navigator initialRouteName={Routes.LOGIN}>
+      <MainStack.Navigator initialRouteName={Routes.WELCOME}>
         <MainStack.Screen
           options={{ headerShown: false }}
           name={Routes.LOGIN}
           component={LoginScreen}
+        />
+        <MainStack.Screen
+          options={{ headerShown: false }}
+          name={Routes.WELCOME}
+          component={WelcomeScreen}
         />
       </MainStack.Navigator>
     </NavigationContainer>

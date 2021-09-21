@@ -9,6 +9,7 @@ declare global {
   namespace ReactNavigation {
     interface RootParamList {
       LOGIN: string;
+      WELCOME: string;
     }
   }
 }
