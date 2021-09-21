@@ -30,6 +30,11 @@ const Image: FC<Props> = ({
   animated = false,
   ...rest
 }) => {
+  const styleImage: StyleProp<ImageStyle> = [
+    width && height ? { width: width, height: height } : {},
+    style,
+  ];
+
   if (animated) {
     return (
       <PhotoAnimated
@@ -37,7 +42,7 @@ const Image: FC<Props> = ({
         testID={id}
         resizeMode={resizeMode}
         onLayout={onLayout}
-        style={[style, { width: width, height: height }]}
+        style={styleImage}
         source={typeof source === 'string' ? { uri: source } : source}
       />
     );
@@ -49,7 +54,7 @@ const Image: FC<Props> = ({
       testID={id}
       resizeMode={resizeMode}
       onLayout={onLayout}
-      style={[style, { width: width, height: height }]}
+      style={styleImage}
       source={typeof source === 'string' ? { uri: source } : source}
     />
   );
