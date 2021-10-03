@@ -1,10 +1,11 @@
 import React, { FC } from 'react';
-import { Block, Text } from '~/components';
+import { Block } from '~/components';
+import { Beer } from './styles';
 
 const Welcome: FC = () => {
   return (
     <Block center middle>
-      <Text>Welcome</Text>
+      <Beer />
     </Block>
   );
 };

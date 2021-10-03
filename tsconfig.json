@@ -39,6 +39,9 @@
       "~/assets/images": [
         "src/assets/images"
       ],
+      "~/assets/json": [
+        "src/assets/json"
+      ],
       "~/screens": [
         "src/screens"
       ],
