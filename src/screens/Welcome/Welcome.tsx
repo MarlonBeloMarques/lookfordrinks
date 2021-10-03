@@ -2,10 +2,16 @@ import React, { FC } from 'react';
 import { Block } from '~/components';
 import { Beer } from './styles';
 
-const Welcome: FC = () => {
+type Props = {
+  beerProgress: number;
+};
+
+const Welcome: FC<Props> = ({ beerProgress }) => {
   return (
-    <Block center middle>
-      <Beer />
+    <Block>
+      <Block center middle>
+        <Beer progress={beerProgress} />
+      </Block>
     </Block>
   );
 };
