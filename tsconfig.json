@@ -42,6 +42,9 @@
       "~/assets/json": [
         "src/assets/json"
       ],
+      "~/assets/fonts": [
+        "src/assets/fonts"
+      ],
       "~/screens": [
         "src/screens"
       ],
