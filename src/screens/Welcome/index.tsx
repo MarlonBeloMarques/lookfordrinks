@@ -21,6 +21,11 @@ const WelcomeContainer: FC = () => {
         duration: 300,
         easing: Easing.linear,
       });
+
+      beerAnimationSize.value = withTiming(300, {
+        duration: 300,
+        easing: Easing.linear,
+      });
     }, 1000);
   }, []);
 
@@ -28,7 +33,11 @@ const WelcomeContainer: FC = () => {
     runOnJS(setBeerProgress)(beerAnimationProgress.value);
   }, [beerAnimationProgress]);
 
-  return <Welcome beerProgress={beerProgress} />;
+  useDerivedValue(() => {
+    runOnJS(setBeerSize)(beerAnimationSize.value);
+  }, [beerAnimationSize]);
+
+  return <Welcome beerProgress={beerProgress} beerSize={beerSize} />;
 };
 
 export default WelcomeContainer;
