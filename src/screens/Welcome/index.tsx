@@ -23,6 +23,7 @@ const WelcomeContainer: FC = () => {
   const beerAnimationSize = useSharedValue(1400);
   const titleAnimationOpacity = useSharedValue(0);
   const descriptionAnimation = useSharedValue(100);
+  const buttonAnimation = useSharedValue(100);
 
   /** style */
   const titleStyle = useAnimatedStyle(() => {
@@ -34,6 +35,11 @@ const WelcomeContainer: FC = () => {
   const descriptionStyle = useAnimatedStyle(() => {
     return {
       transform: [{ translateX: descriptionAnimation.value }],
+    };
+  });
+  const buttonStyle = useAnimatedStyle(() => {
+    return {
+      transform: [{ translateX: buttonAnimation.value }],
     };
   });
 
@@ -89,6 +95,13 @@ const WelcomeContainer: FC = () => {
         },
       );
     }
+
+    if (showButton) {
+      buttonAnimation.value = withTiming(0, {
+        duration: 300,
+        easing: Easing.bounce,
+      });
+    }
   });
 
   useDerivedValue(() => {
@@ -108,6 +121,7 @@ const WelcomeContainer: FC = () => {
       showButton={showButton}
       titleStyle={titleStyle}
       descriptionStyle={descriptionStyle}
+      buttonStyle={buttonStyle}
     />
   );
 };

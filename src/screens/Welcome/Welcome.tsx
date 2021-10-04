@@ -11,6 +11,7 @@ type Props = {
   showButton: boolean;
   titleStyle: StyleProp<ViewStyle>;
   descriptionStyle: StyleProp<ViewStyle>;
+  buttonStyle: StyleProp<ViewStyle>;
 };
 
 const Welcome: FC<Props> = ({
@@ -21,6 +22,7 @@ const Welcome: FC<Props> = ({
   showButton,
   titleStyle,
   descriptionStyle,
+  buttonStyle,
 }) => {
   return (
     <SceneWrapper>
@@ -48,7 +50,7 @@ const Welcome: FC<Props> = ({
           </Block>
         )}
         {showButton && (
-          <Block flex={false}>
+          <Block animated flex={false} style={[{}, buttonStyle]}>
             <Button onPress={() => {}}>LETS GO</Button>
           </Block>
         )}
