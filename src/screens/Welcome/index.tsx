@@ -16,6 +16,7 @@ const WelcomeContainer: FC = () => {
   /** condition */
   const [showTitle, setShowTitle] = useState(false);
   const [showDescription, setShowDescription] = useState(false);
+  const [showButton, setShowButton] = useState(false);
 
   /** animation value */
   const beerAnimationProgress = useSharedValue(0);
@@ -75,10 +76,18 @@ const WelcomeContainer: FC = () => {
     }
 
     if (showDescription) {
-      descriptionAnimation.value = withTiming(0, {
-        duration: 300,
-        easing: Easing.bounce,
-      });
+      descriptionAnimation.value = withTiming(
+        0,
+        {
+          duration: 300,
+          easing: Easing.bounce,
+        },
+        (finished: boolean) => {
+          if (finished) {
+            runOnJS(setShowButton)(true);
+          }
+        },
+      );
     }
   });
 
@@ -96,6 +105,7 @@ const WelcomeContainer: FC = () => {
       beerSize={beerSize}
       showTitle={showTitle}
       showDescription={showDescription}
+      showButton={showButton}
       titleStyle={titleStyle}
       descriptionStyle={descriptionStyle}
     />

@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import { StyleProp, ViewStyle } from 'react-native';
-import { Block, Text } from '~/components';
+import { Block, Button, Text } from '~/components';
 import { Beer, SceneWrapper, Title } from './styles';
 
 type Props = {
@@ -8,6 +8,7 @@ type Props = {
   beerSize: number;
   showTitle: boolean;
   showDescription: boolean;
+  showButton: boolean;
   titleStyle: StyleProp<ViewStyle>;
   descriptionStyle: StyleProp<ViewStyle>;
 };
@@ -17,6 +18,7 @@ const Welcome: FC<Props> = ({
   beerSize,
   showTitle,
   showDescription,
+  showButton,
   titleStyle,
   descriptionStyle,
 }) => {
@@ -43,6 +45,11 @@ const Welcome: FC<Props> = ({
             <Text weight="bold" align="left">
               Find your favorite drinks and discover new places to drink
             </Text>
+          </Block>
+        )}
+        {showButton && (
+          <Block flex={false}>
+            <Button onPress={() => {}}>LETS GO</Button>
           </Block>
         )}
       </Block>
