@@ -9,6 +9,7 @@ type Props = {
   showTitle: boolean;
   showDescription: boolean;
   titleStyle: StyleProp<ViewStyle>;
+  descriptionStyle: StyleProp<ViewStyle>;
 };
 
 const Welcome: FC<Props> = ({
@@ -17,6 +18,7 @@ const Welcome: FC<Props> = ({
   showTitle,
   showDescription,
   titleStyle,
+  descriptionStyle,
 }) => {
   return (
     <SceneWrapper>
@@ -37,9 +39,11 @@ const Welcome: FC<Props> = ({
       </Block>
       <Block flex={0.3}>
         {showDescription && (
-          <Text weight="bold" align="left">
-            Find your favorite drinks and discover new places to drink
-          </Text>
+          <Block animated flex={false} style={[{}, descriptionStyle]}>
+            <Text weight="bold" align="left">
+              Find your favorite drinks and discover new places to drink
+            </Text>
+          </Block>
         )}
       </Block>
     </SceneWrapper>

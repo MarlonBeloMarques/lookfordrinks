@@ -21,11 +21,18 @@ const WelcomeContainer: FC = () => {
   const beerAnimationProgress = useSharedValue(0);
   const beerAnimationSize = useSharedValue(1400);
   const titleAnimationOpacity = useSharedValue(0);
+  const descriptionAnimation = useSharedValue(100);
 
   /** style */
   const titleStyle = useAnimatedStyle(() => {
     return {
       opacity: titleAnimationOpacity.value,
+    };
+  });
+
+  const descriptionStyle = useAnimatedStyle(() => {
+    return {
+      transform: [{ translateX: descriptionAnimation.value }],
     };
   });
 
@@ -66,6 +73,13 @@ const WelcomeContainer: FC = () => {
         },
       );
     }
+
+    if (showDescription) {
+      descriptionAnimation.value = withTiming(0, {
+        duration: 300,
+        easing: Easing.bounce,
+      });
+    }
   });
 
   useDerivedValue(() => {
@@ -83,6 +97,7 @@ const WelcomeContainer: FC = () => {
       showTitle={showTitle}
       showDescription={showDescription}
       titleStyle={titleStyle}
+      descriptionStyle={descriptionStyle}
     />
   );
 };
