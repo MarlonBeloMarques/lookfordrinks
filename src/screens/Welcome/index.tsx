@@ -2,6 +2,7 @@ import React, { FC, useEffect, useState } from 'react';
 import {
   Easing,
   runOnJS,
+  useAnimatedStyle,
   useDerivedValue,
   useSharedValue,
   withTiming,
@@ -13,8 +14,17 @@ const WelcomeContainer: FC = () => {
   const [beerSize, setBeerSize] = useState(1400);
   const [showTitle, setShowTitle] = useState(false);
 
+  /** animation value */
   const beerAnimationProgress = useSharedValue(0);
   const beerAnimationSize = useSharedValue(1400);
+  const titleAnimationOpacity = useSharedValue(0);
+
+  /** style */
+  const titleStyle = useAnimatedStyle(() => {
+    return {
+      opacity: titleAnimationOpacity.value,
+    };
+  });
 
   useEffect(() => {
     setTimeout(() => {
@@ -38,6 +48,15 @@ const WelcomeContainer: FC = () => {
     }, 1000);
   }, []);
 
+  useEffect(() => {
+    if (showTitle) {
+      titleAnimationOpacity.value = withTiming(1, {
+        duration: 1000,
+        easing: Easing.linear,
+      });
+    }
+  });
+
   useDerivedValue(() => {
     runOnJS(setBeerProgress)(beerAnimationProgress.value);
   }, [beerAnimationProgress]);
@@ -51,6 +70,7 @@ const WelcomeContainer: FC = () => {
       beerProgress={beerProgress}
       beerSize={beerSize}
       showTitle={showTitle}
+      titleStyle={titleStyle}
     />
   );
 };
