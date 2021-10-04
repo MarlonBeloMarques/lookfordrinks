@@ -12,7 +12,10 @@ import Welcome from './Welcome';
 const WelcomeContainer: FC = () => {
   const [beerProgress, setBeerProgress] = useState(0);
   const [beerSize, setBeerSize] = useState(1400);
+
+  /** condition */
   const [showTitle, setShowTitle] = useState(false);
+  const [showDescription, setShowDescription] = useState(false);
 
   /** animation value */
   const beerAnimationProgress = useSharedValue(0);
@@ -50,10 +53,18 @@ const WelcomeContainer: FC = () => {
 
   useEffect(() => {
     if (showTitle) {
-      titleAnimationOpacity.value = withTiming(1, {
-        duration: 1000,
-        easing: Easing.linear,
-      });
+      titleAnimationOpacity.value = withTiming(
+        1,
+        {
+          duration: 1000,
+          easing: Easing.linear,
+        },
+        (finished: boolean) => {
+          if (finished) {
+            runOnJS(setShowDescription)(true);
+          }
+        },
+      );
     }
   });
 
@@ -70,6 +81,7 @@ const WelcomeContainer: FC = () => {
       beerProgress={beerProgress}
       beerSize={beerSize}
       showTitle={showTitle}
+      showDescription={showDescription}
       titleStyle={titleStyle}
     />
   );
