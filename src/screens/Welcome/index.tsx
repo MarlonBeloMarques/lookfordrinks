@@ -1,6 +1,8 @@
 import React, { FC, useEffect, useState } from 'react';
 import {
   Easing,
+  Extrapolate,
+  interpolate,
   runOnJS,
   useAnimatedStyle,
   useDerivedValue,
@@ -21,8 +23,7 @@ const WelcomeContainer: FC = () => {
   const [openTransition, setOpenTransition] = useState(false);
 
   /** animation value */
-  const beerAnimationProgress = useSharedValue(0);
-  const beerAnimationSize = useSharedValue(1400);
+  const beerAnimation = useSharedValue(0);
   const titleAnimationOpacity = useSharedValue(0);
   const descriptionAnimation = useSharedValue(100);
   const buttonAnimation = useSharedValue(100);
@@ -47,7 +48,7 @@ const WelcomeContainer: FC = () => {
 
   useEffect(() => {
     setTimeout(() => {
-      beerAnimationProgress.value = withTiming(
+      beerAnimation.value = withTiming(
         0.99,
         {
           duration: 300,
@@ -59,11 +60,6 @@ const WelcomeContainer: FC = () => {
           }
         },
       );
-
-      beerAnimationSize.value = withTiming(300, {
-        duration: 300,
-        easing: Easing.linear,
-      });
     }, 1000);
   }, []);
 
@@ -107,12 +103,19 @@ const WelcomeContainer: FC = () => {
   });
 
   useDerivedValue(() => {
-    runOnJS(setBeerProgress)(beerAnimationProgress.value);
-  }, [beerAnimationProgress]);
+    runOnJS(setBeerProgress)(beerAnimation.value);
+  }, [beerAnimation]);
 
   useDerivedValue(() => {
-    runOnJS(setBeerSize)(beerAnimationSize.value);
-  }, [beerAnimationSize]);
+    runOnJS(setBeerSize)(
+      interpolate(
+        beerAnimation.value,
+        [0, 0.99],
+        [1400, 300],
+        Extrapolate.CLAMP,
+      ),
+    );
+  }, [beerAnimation]);
 
   return (
     <Welcome
