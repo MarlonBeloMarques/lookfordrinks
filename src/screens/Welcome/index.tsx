@@ -12,11 +12,13 @@ import Welcome from './Welcome';
 const WelcomeContainer: FC = () => {
   const [beerProgress, setBeerProgress] = useState(0);
   const [beerSize, setBeerSize] = useState(1400);
+  const [initialPosTransitionalY, setInitialPosTransitionalY] = useState(0);
 
   /** condition */
   const [showTitle, setShowTitle] = useState(false);
   const [showDescription, setShowDescription] = useState(false);
   const [showButton, setShowButton] = useState(false);
+  const [openTransition, setOpenTransition] = useState(false);
 
   /** animation value */
   const beerAnimationProgress = useSharedValue(0);
@@ -119,6 +121,10 @@ const WelcomeContainer: FC = () => {
       showTitle={showTitle}
       showDescription={showDescription}
       showButton={showButton}
+      openTransition={openTransition}
+      setOpenTransition={setOpenTransition}
+      initialPosTransitionalY={initialPosTransitionalY}
+      setInitialPosTransitionalY={setInitialPosTransitionalY}
       titleStyle={titleStyle}
       descriptionStyle={descriptionStyle}
       buttonStyle={buttonStyle}
