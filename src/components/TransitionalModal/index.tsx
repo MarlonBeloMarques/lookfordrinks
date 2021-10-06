@@ -1,6 +1,6 @@
 import React, { FC, memo, useEffect } from 'react';
 import { Dimensions } from 'react-native';
-import {
+import Animated, {
   Easing,
   Extrapolate,
   interpolate,
@@ -15,36 +15,21 @@ type Props = {
 };
 
 const TransitionalModal: FC<Props> = ({ initialPositionY }) => {
-  const animaitonValue = useSharedValue(1);
-
-  const animationStyle = useAnimatedStyle(() => {
-    return {
-      width: interpolate(
-        animaitonValue.value,
-        [1, 0],
-        [1, 1600],
-        Extrapolate.CLAMP,
-      ),
-      height: interpolate(
-        animaitonValue.value,
-        [1, 0],
-        [1, 1600],
-        Extrapolate.CLAMP,
-      ),
-      borderRadius: interpolate(
-        animaitonValue.value,
-        [1, 0],
-        [10, 900],
-        Extrapolate.CLAMP,
-      ),
-    };
-  });
+  const animationValueOrange = useSharedValue(1);
+  const animationValueWhite = useSharedValue(1);
 
   useEffect(() => {
-    animaitonValue.value = withTiming(0, {
+    animationValueOrange.value = withTiming(0, {
       duration: 400,
       easing: Easing.linear,
     });
+
+    setTimeout(() => {
+      animationValueWhite.value = withTiming(0, {
+        duration: 400,
+        easing: Easing.linear,
+      });
+    }, 160);
   }, []);
 
   return (
@@ -58,16 +43,52 @@ const TransitionalModal: FC<Props> = ({ initialPositionY }) => {
       height={Dimensions.get('screen').height}
     >
       <Block
+        zIndex={1}
+        absolute
         animated
         flex={false}
         color="primary"
         style={[
           { transform: [{ translateY: initialPositionY }] },
-          animationStyle,
+          animationStyleDefault(animationValueOrange),
         ]}
-      ></Block>
+      />
+      <Block
+        zIndex={2}
+        absolute
+        animated
+        flex={false}
+        style={[
+          { transform: [{ translateY: initialPositionY }] },
+          animationStyleDefault(animationValueWhite),
+        ]}
+      />
     </Block>
   );
 };
+
+const animationStyleDefault = (animationValue: Animated.SharedValue<number>) =>
+  useAnimatedStyle(() => {
+    return {
+      width: interpolate(
+        animationValue.value,
+        [1, 0],
+        [1, 1600],
+        Extrapolate.CLAMP,
+      ),
+      height: interpolate(
+        animationValue.value,
+        [1, 0],
+        [1, 1600],
+        Extrapolate.CLAMP,
+      ),
+      borderRadius: interpolate(
+        animationValue.value,
+        [1, 0],
+        [10, 900],
+        Extrapolate.CLAMP,
+      ),
+    };
+  });
 
 export default memo(TransitionalModal);
