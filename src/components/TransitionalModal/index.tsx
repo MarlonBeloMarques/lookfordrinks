@@ -4,6 +4,7 @@ import Animated, {
   Easing,
   Extrapolate,
   interpolate,
+  runOnJS,
   useAnimatedStyle,
   useSharedValue,
   withTiming,
@@ -12,11 +13,19 @@ import Block from '../Block';
 
 type Props = {
   initialPositionY: number;
+  finished?: (e: boolean) => void;
 };
 
-const TransitionalModal: FC<Props> = ({ initialPositionY }) => {
+const TransitionalModal: FC<Props> = ({
+  initialPositionY,
+  finished = () => {},
+}) => {
   const animationValueOrange = useSharedValue(1);
   const animationValueWhite = useSharedValue(1);
+
+  const handleFinished = () => {
+    finished(true);
+  };
 
   useEffect(() => {
     animationValueOrange.value = withTiming(0, {
@@ -25,10 +34,18 @@ const TransitionalModal: FC<Props> = ({ initialPositionY }) => {
     });
 
     setTimeout(() => {
-      animationValueWhite.value = withTiming(0, {
-        duration: 400,
-        easing: Easing.linear,
-      });
+      animationValueWhite.value = withTiming(
+        0,
+        {
+          duration: 400,
+          easing: Easing.linear,
+        },
+        (finished: boolean) => {
+          if (finished) {
+            runOnJS(handleFinished)();
+          }
+        },
+      );
     }, 160);
   }, []);
 
