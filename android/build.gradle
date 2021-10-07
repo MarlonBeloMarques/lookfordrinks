@@ -7,6 +7,8 @@ buildscript {
         compileSdkVersion = 30
         targetSdkVersion = 30
         kotlinVersion = "1.4.32"
+        playServicesVersion = "17.0.0"
+        androidMapsUtilsVersion = "2.2.5"
         ndkVersion = "20.1.5948944"
     }
     repositories {

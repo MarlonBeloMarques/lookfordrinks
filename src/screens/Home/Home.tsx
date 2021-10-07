@@ -1,10 +1,11 @@
 import React, { FC } from 'react';
-import { Block, Text } from '~/components';
+import MapView from 'react-native-maps';
+import { Block } from '~/components';
 
 const Home: FC = () => {
   return (
-    <Block center middle>
-      <Text>Home Screen</Text>
+    <Block>
+      <MapView testID="mapView" style={{ flex: 1 }}></MapView>
     </Block>
   );
 };
