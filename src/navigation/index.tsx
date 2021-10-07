@@ -1,5 +1,6 @@
 import React, { useContext, useRef } from 'react';
 import { ThemeContext } from 'styled-components/native';
+import { Platform } from 'react-native';
 import {
   NavigationContainer,
   NavigationContainerRef,
@@ -11,8 +12,8 @@ import {
 import { createStackNavigator } from '@react-navigation/stack';
 import { NavigationState, PartialState } from '@react-navigation/routers';
 import { AnalyticsService } from '~/services';
-import { getColors } from '~/utils';
-import { LoginScreen, WelcomeScreen } from '~/screens';
+import { getColors, getTheme } from '~/utils';
+import { HomeScreen, LoginScreen, WelcomeScreen } from '~/screens';
 import * as NavigationActions from './actions';
 import { Routes } from './routes';
 
@@ -67,7 +68,21 @@ export const Navigation: React.FC<Props> = ({ setNavigationTop }) => {
       theme={contextTheme}
       onStateChange={onNavigationStateChange}
     >
-      <MainStack.Navigator initialRouteName={Routes.WELCOME}>
+      <MainStack.Navigator
+        initialRouteName={Routes.WELCOME}
+        screenOptions={{
+          headerTransparent: true,
+          headerBackTitleVisible: false,
+          title: '',
+          headerTintColor: getColors('text'),
+          headerLeftContainerStyle: {
+            marginLeft: Platform.OS === 'ios' ? getTheme('baseSpacing') : 0,
+          },
+          headerRightContainerStyle: {
+            marginRight: Platform.OS === 'ios' ? getTheme('baseSpacing') : 0,
+          },
+        }}
+      >
         <MainStack.Screen
           options={{ headerShown: false }}
           name={Routes.LOGIN}
@@ -77,6 +92,13 @@ export const Navigation: React.FC<Props> = ({ setNavigationTop }) => {
           options={{ headerShown: false }}
           name={Routes.WELCOME}
           component={WelcomeScreen}
+        />
+        <MainStack.Screen
+          options={{
+            presentation: 'transparentModal',
+          }}
+          name={Routes.HOME}
+          component={HomeScreen}
         />
       </MainStack.Navigator>
     </NavigationContainer>

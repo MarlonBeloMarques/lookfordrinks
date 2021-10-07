@@ -10,6 +10,7 @@ declare global {
     interface RootParamList {
       LOGIN: string;
       WELCOME: string;
+      HOME: string;
     }
   }
 }

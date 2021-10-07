@@ -1,6 +1,7 @@
 import React, { FC } from 'react';
 import { LayoutChangeEvent, StyleProp, ViewStyle } from 'react-native';
 import { Block, Button, Text, TransitionalModal } from '~/components';
+import { NavigationActions } from '~/navigation';
 import { Beer, SceneWrapper, Title } from './styles';
 
 type Props = {
@@ -39,7 +40,10 @@ const Welcome: FC<Props> = ({
   return (
     <Block>
       {openTransition && (
-        <TransitionalModal initialPositionY={initialPosTransitionalY} />
+        <TransitionalModal
+          initialPositionY={initialPosTransitionalY}
+          finished={(e) => e && NavigationActions.navigate('HOME')}
+        />
       )}
       <SceneWrapper>
         <Block flex={0.3}>
