@@ -8,3 +8,4 @@ export { default as Block } from './Block';
 
 /** components */
 export { default as TransitionalModal } from './TransitionalModal';
+export { default as MapCard } from './MapCard';
