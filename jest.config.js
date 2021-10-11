@@ -25,7 +25,7 @@ module.exports = {
     '!src/**/*.d.ts',
   ],
   transformIgnorePatterns: [],
-  modulePathIgnorePatterns: ['helpers'],
+  modulePathIgnorePatterns: ['helpers', 'fixtures'],
   setupFiles: [
     '<rootDir>/jest.setup.js',
     './__mocks__/react-native-firebase.ts',
