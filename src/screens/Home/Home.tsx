@@ -5,9 +5,25 @@ import { Block } from '~/components';
 
 type Props = {
   position: Geolocation.GeoPosition;
+  listBreweries: Array<Brewerie>;
 };
 
-const Home: FC<Props> = ({ position }) => {
+const Home: FC<Props> = ({ position, listBreweries }) => {
+  const renderMarkerBreweries = () => {
+    return listBreweries.map((brewerie, index) => {
+      return (
+        <Marker
+          key={index}
+          coordinate={{
+            latitude: Number.parseFloat(brewerie.latitude),
+            longitude: Number.parseFloat(brewerie.longitude),
+          }}
+          title={brewerie.name}
+        />
+      );
+    });
+  };
+
   return (
     <Block>
       <MapView
@@ -16,8 +32,8 @@ const Home: FC<Props> = ({ position }) => {
         initialRegion={{
           latitude: position.coords.latitude,
           longitude: position.coords.longitude,
-          latitudeDelta: 1,
-          longitudeDelta: 1,
+          latitudeDelta: 0.1,
+          longitudeDelta: 0.1,
         }}
       >
         {position && (
@@ -26,6 +42,7 @@ const Home: FC<Props> = ({ position }) => {
             title="Your real-time location"
           />
         )}
+        {listBreweries.length !== 0 && renderMarkerBreweries()}
       </MapView>
     </Block>
   );

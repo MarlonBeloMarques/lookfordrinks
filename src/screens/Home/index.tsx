@@ -1,6 +1,7 @@
 import React, { FC, useEffect, useState } from 'react';
 import { Alert } from 'react-native';
 import Geolocation from 'react-native-geolocation-service';
+import { BreweriesApi } from '~/api';
 import Home from './Home';
 import { hasLocationPermission } from './permissions';
 
@@ -22,10 +23,26 @@ const initialPositionValue: Geolocation.GeoPosition = {
 const HomeContainer: FC = () => {
   const [myPosition, setMyPosition] =
     useState<Geolocation.GeoPosition>(initialPositionValue);
+  const [listBreweries, setListBreweries] = useState<Array<Brewerie>>([]);
 
   useEffect(() => {
     getLocation();
+    getListBreweries();
   }, []);
+
+  const getListBreweries = async () => {
+    try {
+      const {
+        coords: { latitude, longitude },
+      } = myPosition;
+      const data = await BreweriesApi.listBreweriesByDistance(
+        latitude,
+        longitude,
+      );
+
+      setListBreweries(data);
+    } catch (error) {}
+  };
 
   const getLocation = async () => {
     try {
@@ -60,7 +77,7 @@ const HomeContainer: FC = () => {
     }
   };
 
-  return <Home position={myPosition} />;
+  return <Home position={myPosition} listBreweries={listBreweries} />;
 };
 
 export default HomeContainer;
