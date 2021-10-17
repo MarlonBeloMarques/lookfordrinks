@@ -1,6 +1,13 @@
-import React, { FC, useEffect, useState } from 'react';
+import React, { FC, useEffect, useRef, useState } from 'react';
 import { Alert } from 'react-native';
 import Geolocation from 'react-native-geolocation-service';
+import MapView from 'react-native-maps';
+import {
+  runOnJS,
+  useAnimatedScrollHandler,
+  useDerivedValue,
+  useSharedValue,
+} from 'react-native-reanimated';
 import { BreweriesApi } from '~/api';
 import Home from './Home';
 import { hasLocationPermission } from './permissions';
@@ -24,6 +31,38 @@ const HomeContainer: FC = () => {
   const [myPosition, setMyPosition] =
     useState<Geolocation.GeoPosition>(initialPositionValue);
   const [listBreweries, setListBreweries] = useState<Array<Brewerie>>([]);
+  const [widthMapCard, setWidthMapCard] = useState(0);
+
+  const animation = useSharedValue(0);
+
+  const mapViewRef = useRef<MapView>(null);
+
+  const animateToRegion = (index: number) => {
+    if (listBreweries.length !== 0) {
+      console.log(listBreweries[index].latitude);
+      mapViewRef.current?.animateToRegion(
+        {
+          latitude: Number.parseFloat(listBreweries[index].latitude),
+          longitude: Number.parseFloat(listBreweries[index].longitude),
+          latitudeDelta: 0.02,
+          longitudeDelta: 0.02,
+        },
+        1000,
+      );
+    }
+  };
+
+  useDerivedValue(() => {
+    let index = Math.floor(animation.value / widthMapCard + 0.3);
+    if (index >= listBreweries.length) {
+      index = listBreweries.length - 1;
+    }
+    if (index <= 0) {
+      index = 0;
+    }
+
+    runOnJS(animateToRegion)(index);
+  }, [animation, listBreweries]);
 
   useEffect(() => {
     getLocation();
@@ -77,7 +116,19 @@ const HomeContainer: FC = () => {
     }
   };
 
-  return <Home position={myPosition} listBreweries={listBreweries} />;
+  const animatedEvent = useAnimatedScrollHandler((event) => {
+    animation.value = event.contentOffset.x;
+  });
+
+  return (
+    <Home
+      mapViewRef={mapViewRef}
+      position={myPosition}
+      listBreweries={listBreweries}
+      animatedEvent={animatedEvent}
+      widthMapCard={setWidthMapCard}
+    />
+  );
 };
 
 export default HomeContainer;

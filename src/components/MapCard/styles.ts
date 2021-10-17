@@ -7,11 +7,7 @@ import Text from '../Text';
 
 const width = Dimensions.get('screen').width;
 
-export const Wrapper = styled(Block).attrs({
-  absolute: true,
-})`
-  bottom: 0;
-  align-self: center;
+export const Wrapper = styled(Block).attrs({})`
   width: ${width / 1.2}px;
   height: 240px;
   border-top-left-radius: 12px;
