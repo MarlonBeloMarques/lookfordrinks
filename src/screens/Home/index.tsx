@@ -11,6 +11,7 @@ import {
 import { BreweriesApi } from '~/api';
 import { Search } from '~/components';
 import { useNavigation } from '~/navigation';
+import { useDebounce } from '~/utils';
 import Home from './Home';
 import { hasLocationPermission } from './permissions';
 
@@ -37,6 +38,8 @@ const HomeContainer: FC = () => {
   const [listBreweries, setListBreweries] = useState<Array<Brewerie>>([]);
   const [widthMapCard, setWidthMapCard] = useState(0);
   const [searchValue, setSearchValue] = useState('');
+
+  const debouncedSearch = useDebounce(searchValue, 1200);
 
   const animation = useSharedValue(0);
 
@@ -90,6 +93,18 @@ const HomeContainer: FC = () => {
         latitude,
         longitude,
       );
+
+      setListBreweries(data);
+    } catch (error) {}
+  };
+
+  useEffect(() => {
+    searchBreweries(debouncedSearch);
+  }, [debouncedSearch]);
+
+  const searchBreweries = async (value: string) => {
+    try {
+      const data = await BreweriesApi.searchBreweries(value);
 
       setListBreweries(data);
     } catch (error) {}

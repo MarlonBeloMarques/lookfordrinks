@@ -22,4 +22,21 @@ export default class BreweriesApi {
       }
     }
   };
+
+  static searchBreweries = async (
+    searchValue: string,
+    url = baseURL,
+  ): Promise<any> => {
+    try {
+      const { data } = await request(url).get(
+        `/breweries/search?query=${searchValue}`,
+      );
+
+      return data;
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        throw new ResponseError(error);
+      }
+    }
+  };
 }
