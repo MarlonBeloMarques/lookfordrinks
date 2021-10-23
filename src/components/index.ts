@@ -5,6 +5,7 @@ export { default as Icon } from './Icon';
 export { default as Input } from './Input';
 export { default as Image } from './Image';
 export { default as Block } from './Block';
+export { default as Search } from './Search';
 
 /** components */
 export { default as TransitionalModal } from './TransitionalModal';

@@ -1,7 +1,7 @@
-import React, { FC, useEffect, useRef, useState } from 'react';
+import React, { FC, useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { Alert } from 'react-native';
 import Geolocation from 'react-native-geolocation-service';
-import MapView, { Region } from 'react-native-maps';
+import MapView from 'react-native-maps';
 import {
   runOnJS,
   useAnimatedScrollHandler,
@@ -9,6 +9,8 @@ import {
   useSharedValue,
 } from 'react-native-reanimated';
 import { BreweriesApi } from '~/api';
+import { Search } from '~/components';
+import { useNavigation } from '~/navigation';
 import Home from './Home';
 import { hasLocationPermission } from './permissions';
 
@@ -28,10 +30,13 @@ const initialPositionValue: Geolocation.GeoPosition = {
 };
 
 const HomeContainer: FC = () => {
+  const { setOptions } = useNavigation();
+
   const [myPosition, setMyPosition] =
     useState<Geolocation.GeoPosition>(initialPositionValue);
   const [listBreweries, setListBreweries] = useState<Array<Brewerie>>([]);
   const [widthMapCard, setWidthMapCard] = useState(0);
+  const [searchValue, setSearchValue] = useState('');
 
   const animation = useSharedValue(0);
 
@@ -50,6 +55,14 @@ const HomeContainer: FC = () => {
       );
     }
   };
+
+  useLayoutEffect(() => {
+    setOptions({
+      headerRight: () => (
+        <Search value={searchValue} onChangeText={setSearchValue} />
+      ),
+    });
+  }, [useNavigation, searchValue]);
 
   useDerivedValue(() => {
     let index = Math.floor(animation.value / widthMapCard + 0.3);
