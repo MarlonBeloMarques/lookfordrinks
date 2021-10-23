@@ -6,6 +6,7 @@ export { default as Input } from './Input';
 export { default as Image } from './Image';
 export { default as Block } from './Block';
 export { default as Search } from './Search';
+export { default as Loading } from './Loading';
 
 /** components */
 export { default as TransitionalModal } from './TransitionalModal';

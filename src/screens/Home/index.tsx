@@ -37,6 +37,7 @@ const HomeContainer: FC = () => {
     useState<Geolocation.GeoPosition>(initialPositionValue);
   const [listBreweries, setListBreweries] = useState<Array<Brewerie>>([]);
   const [widthMapCard, setWidthMapCard] = useState(0);
+  const [loading, setLoading] = useState(false);
   const [searchValue, setSearchValue] = useState('');
 
   const debouncedSearch = useDebounce(searchValue, 1200);
@@ -84,6 +85,14 @@ const HomeContainer: FC = () => {
     getListBreweries();
   }, []);
 
+  const treatsListBreweries = (listBreweries: Array<Brewerie>) => {
+    const treatd = listBreweries.filter(
+      (brewery) => brewery.latitude && brewery.longitude,
+    );
+
+    setListBreweries(treatd);
+  };
+
   const getListBreweries = async () => {
     try {
       const {
@@ -94,20 +103,24 @@ const HomeContainer: FC = () => {
         longitude,
       );
 
-      setListBreweries(data);
+      treatsListBreweries(data);
     } catch (error) {}
   };
 
   useEffect(() => {
-    searchBreweries(debouncedSearch);
+    debouncedSearch.length !== 0 && searchBreweries(debouncedSearch);
   }, [debouncedSearch]);
 
   const searchBreweries = async (value: string) => {
     try {
+      setLoading(true);
       const data = await BreweriesApi.searchBreweries(value);
 
-      setListBreweries(data);
-    } catch (error) {}
+      treatsListBreweries(data);
+    } catch (error) {
+    } finally {
+      setLoading(false);
+    }
   };
 
   const getLocation = async () => {
@@ -151,6 +164,7 @@ const HomeContainer: FC = () => {
     <Home
       mapViewRef={mapViewRef}
       position={myPosition}
+      loading={loading}
       listBreweries={listBreweries}
       animatedEvent={animatedEvent}
       setWidthMapCard={setWidthMapCard}
