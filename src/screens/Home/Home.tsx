@@ -1,14 +1,22 @@
 import React, { Dispatch, FC, LegacyRef, SetStateAction } from 'react';
-import MapView, { Marker } from 'react-native-maps';
+import MapView, { Marker, Point } from 'react-native-maps';
 import Geolocation from 'react-native-geolocation-service';
-import { Block, MapCardList } from '~/components';
+import Animated, {
+  Extrapolate,
+  interpolate,
+  useAnimatedStyle,
+} from 'react-native-reanimated';
+import { Block, Image, MapCardList } from '~/components';
+import { BeerMarker } from '~/assets/images';
 
 type Props = {
   position: Geolocation.GeoPosition;
   listBreweries: Array<Brewerie>;
   mapViewRef: LegacyRef<MapView>;
   animatedEvent: any;
-  widthMapCard: Dispatch<SetStateAction<number>>;
+  setWidthMapCard: Dispatch<SetStateAction<number>>;
+  widthMapCard: number;
+  animation: Animated.SharedValue<number>;
 };
 
 const Home: FC<Props> = ({
@@ -16,10 +24,29 @@ const Home: FC<Props> = ({
   listBreweries,
   mapViewRef,
   animatedEvent,
+  animation,
   widthMapCard,
+  setWidthMapCard,
 }) => {
   const renderMarkerBreweries = () => {
     return listBreweries.map((brewerie, index) => {
+      const scaleStyle = useAnimatedStyle(() => {
+        const size = interpolate(
+          animation.value,
+          [
+            (index - 1) * widthMapCard,
+            index * widthMapCard,
+            (index + 1) * widthMapCard,
+          ],
+          [25, 40, 25],
+          Extrapolate.CLAMP,
+        );
+        return {
+          width: size,
+          height: size,
+        };
+      });
+
       return (
         <Marker
           key={index}
@@ -28,7 +55,9 @@ const Home: FC<Props> = ({
             longitude: Number.parseFloat(brewerie.longitude),
           }}
           title={brewerie.name}
-        />
+        >
+          <Image animated source={BeerMarker} style={scaleStyle} />
+        </Marker>
       );
     });
   };
@@ -60,7 +89,7 @@ const Home: FC<Props> = ({
         listBreweries={listBreweries}
         onScroll={animatedEvent}
         getWidth={(width) => {
-          widthMapCard(width);
+          setWidthMapCard(width);
         }}
       />
     </Block>

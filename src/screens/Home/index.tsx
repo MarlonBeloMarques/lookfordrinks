@@ -1,7 +1,7 @@
 import React, { FC, useEffect, useRef, useState } from 'react';
 import { Alert } from 'react-native';
 import Geolocation from 'react-native-geolocation-service';
-import MapView from 'react-native-maps';
+import MapView, { Region } from 'react-native-maps';
 import {
   runOnJS,
   useAnimatedScrollHandler,
@@ -39,7 +39,6 @@ const HomeContainer: FC = () => {
 
   const animateToRegion = (index: number) => {
     if (listBreweries.length !== 0) {
-      console.log(listBreweries[index].latitude);
       mapViewRef.current?.animateToRegion(
         {
           latitude: Number.parseFloat(listBreweries[index].latitude),
@@ -126,7 +125,9 @@ const HomeContainer: FC = () => {
       position={myPosition}
       listBreweries={listBreweries}
       animatedEvent={animatedEvent}
-      widthMapCard={setWidthMapCard}
+      setWidthMapCard={setWidthMapCard}
+      widthMapCard={widthMapCard}
+      animation={animation}
     />
   );
 };
