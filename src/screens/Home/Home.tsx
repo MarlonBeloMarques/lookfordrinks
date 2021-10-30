@@ -6,12 +6,14 @@ import Animated, {
   interpolate,
   useAnimatedStyle,
 } from 'react-native-reanimated';
-import { Block, Image, Loading, MapCardList } from '~/components';
+import { Block, Image, Loading, MapCardList, NotFoundCard } from '~/components';
 import { BeerMarker } from '~/assets/images';
+import { WrapperNotFound } from './styles';
 
 type Props = {
   position: Geolocation.GeoPosition;
   loading: boolean;
+  initialized: boolean;
   listBreweries: Array<Brewerie>;
   mapViewRef: LegacyRef<MapView>;
   animatedEvent: any;
@@ -23,6 +25,7 @@ type Props = {
 const Home: FC<Props> = ({
   position,
   loading,
+  initialized,
   listBreweries,
   mapViewRef,
   animatedEvent,
@@ -79,9 +82,22 @@ const Home: FC<Props> = ({
     return Number.parseFloat(listBreweries[0].longitude);
   };
 
+  const renderNotFound = () => {
+    if (!loading && listBreweries.length === 0 && initialized) {
+      return (
+        <WrapperNotFound>
+          <NotFoundCard />
+        </WrapperNotFound>
+      );
+    }
+
+    return <></>;
+  };
+
   return (
     <Block>
       {loading && <Loading />}
+      {renderNotFound()}
       <MapView
         ref={mapViewRef}
         testID="mapView"

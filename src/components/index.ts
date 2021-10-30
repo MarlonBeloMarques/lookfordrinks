@@ -12,3 +12,4 @@ export { default as Loading } from './Loading';
 export { default as TransitionalModal } from './TransitionalModal';
 export { default as MapCard } from './MapCard';
 export { default as MapCardList } from './MapCardList';
+export { default as NotFoundCard } from './NotFoundCard';

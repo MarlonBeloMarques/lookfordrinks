@@ -39,6 +39,7 @@ const HomeContainer: FC = () => {
   const [widthMapCard, setWidthMapCard] = useState(0);
   const [loading, setLoading] = useState(false);
   const [searchValue, setSearchValue] = useState('');
+  const [initialized, setInitialized] = useState(false);
 
   const debouncedSearch = useDebounce(searchValue, 1200);
 
@@ -104,7 +105,10 @@ const HomeContainer: FC = () => {
       );
 
       treatsListBreweries(data);
-    } catch (error) {}
+    } catch (error) {
+    } finally {
+      !initialized && setInitialized(true);
+    }
   };
 
   useEffect(() => {
@@ -165,6 +169,7 @@ const HomeContainer: FC = () => {
       mapViewRef={mapViewRef}
       position={myPosition}
       loading={loading}
+      initialized={initialized}
       listBreweries={listBreweries}
       animatedEvent={animatedEvent}
       setWidthMapCard={setWidthMapCard}
