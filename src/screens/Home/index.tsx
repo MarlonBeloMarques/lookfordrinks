@@ -111,6 +111,12 @@ const HomeContainer: FC = () => {
     }
   };
 
+  const getBreweriesNearMe = async () => {
+    setLoading(true);
+    await getListBreweries();
+    setLoading(false);
+  };
+
   useEffect(() => {
     debouncedSearch.length !== 0 && searchBreweries(debouncedSearch);
   }, [debouncedSearch]);
@@ -173,6 +179,7 @@ const HomeContainer: FC = () => {
       listBreweries={listBreweries}
       animatedEvent={animatedEvent}
       setWidthMapCard={setWidthMapCard}
+      getBreweriesNearMe={getBreweriesNearMe}
       widthMapCard={widthMapCard}
       animation={animation}
     />

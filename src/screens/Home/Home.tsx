@@ -8,7 +8,12 @@ import Animated, {
 } from 'react-native-reanimated';
 import { Block, Image, Loading, MapCardList, NotFoundCard } from '~/components';
 import { BeerMarker } from '~/assets/images';
-import { WrapperNotFound } from './styles';
+import {
+  NearMeButton,
+  NearMeIcon,
+  WrapperNearMe,
+  WrapperNotFound,
+} from './styles';
 
 type Props = {
   position: Geolocation.GeoPosition;
@@ -18,6 +23,7 @@ type Props = {
   mapViewRef: LegacyRef<MapView>;
   animatedEvent: any;
   setWidthMapCard: Dispatch<SetStateAction<number>>;
+  getBreweriesNearMe: () => void;
   widthMapCard: number;
   animation: Animated.SharedValue<number>;
 };
@@ -32,6 +38,7 @@ const Home: FC<Props> = ({
   animation,
   widthMapCard,
   setWidthMapCard,
+  getBreweriesNearMe,
 }) => {
   const renderMarkerBreweries = () => {
     return listBreweries.map((brewerie, index) => {
@@ -97,6 +104,11 @@ const Home: FC<Props> = ({
   return (
     <Block>
       {loading && <Loading />}
+      <NearMeButton onPress={() => getBreweriesNearMe()}>
+        <WrapperNearMe>
+          <NearMeIcon />
+        </WrapperNearMe>
+      </NearMeButton>
       {renderNotFound()}
       <MapView
         ref={mapViewRef}
