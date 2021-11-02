@@ -20,10 +20,11 @@ const inputStyle = {
 
 type Props = {
   value: string;
+  disabled?: boolean;
   onChangeText: Dispatch<SetStateAction<string>>;
 };
 
-const Search: FC<Props> = ({ value, onChangeText }) => {
+const Search: FC<Props> = ({ value, disabled = false, onChangeText }) => {
   return (
     <Block
       style={{
@@ -41,6 +42,7 @@ const Search: FC<Props> = ({ value, onChangeText }) => {
         />
       </Block>
       <Input
+        disabled={!disabled}
         placeholder="search for a brewery"
         value={value}
         onChangeText={onChangeText}

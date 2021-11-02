@@ -64,7 +64,11 @@ const HomeContainer: FC = () => {
   useLayoutEffect(() => {
     setOptions({
       headerRight: () => (
-        <Search value={searchValue} onChangeText={setSearchValue} />
+        <Search
+          disabled={loading}
+          value={searchValue}
+          onChangeText={setSearchValue}
+        />
       ),
     });
   }, [useNavigation, searchValue]);
