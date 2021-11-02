@@ -1,4 +1,4 @@
-import React, { Dispatch, FC, LegacyRef, SetStateAction } from 'react';
+import React, { FC, LegacyRef } from 'react';
 import MapView, { Marker } from 'react-native-maps';
 import Geolocation from 'react-native-geolocation-service';
 import Animated, {
@@ -22,7 +22,6 @@ type Props = {
   listBreweries: Array<Brewerie>;
   mapViewRef: LegacyRef<MapView>;
   animatedEvent: any;
-  setWidthMapCard: Dispatch<SetStateAction<number>>;
   getBreweriesNearMe: () => void;
   widthMapCard: number;
   animation: Animated.SharedValue<number>;
@@ -37,7 +36,6 @@ const Home: FC<Props> = ({
   animatedEvent,
   animation,
   widthMapCard,
-  setWidthMapCard,
   getBreweriesNearMe,
 }) => {
   const renderMarkerBreweries = () => {
@@ -133,9 +131,7 @@ const Home: FC<Props> = ({
         <MapCardList
           listBreweries={listBreweries}
           onScroll={animatedEvent}
-          getWidth={(width) => {
-            setWidthMapCard(width);
-          }}
+          width={widthMapCard}
         />
       )}
     </Block>

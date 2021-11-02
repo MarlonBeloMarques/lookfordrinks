@@ -1,5 +1,4 @@
 import React, { FC } from 'react';
-import { Dimensions } from 'react-native';
 import Animated from 'react-native-reanimated';
 import MapCard from '../MapCard';
 import Block from '../Block';
@@ -7,16 +6,10 @@ import Block from '../Block';
 type Props = {
   listBreweries: Array<Brewerie>;
   onScroll: any;
-  getWidth?: (width: number) => void;
+  width: number;
 };
 
-const width = Dimensions.get('screen').width / 1;
-
-const MapCardList: FC<Props> = ({
-  listBreweries,
-  onScroll,
-  getWidth = () => {},
-}) => {
+const MapCardList: FC<Props> = ({ listBreweries, onScroll, width }) => {
   return (
     <Animated.ScrollView
       horizontal
@@ -27,7 +20,6 @@ const MapCardList: FC<Props> = ({
       style={{ position: 'absolute', bottom: 0 }}
       onScroll={onScroll}
     >
-      {getWidth(width)}
       {listBreweries.map((item) => (
         <Block
           key={item.id}

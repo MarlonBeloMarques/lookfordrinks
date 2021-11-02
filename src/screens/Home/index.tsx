@@ -1,5 +1,5 @@
 import React, { FC, useEffect, useLayoutEffect, useRef, useState } from 'react';
-import { Alert } from 'react-native';
+import { Alert, Dimensions } from 'react-native';
 import Geolocation from 'react-native-geolocation-service';
 import MapView from 'react-native-maps';
 import {
@@ -30,13 +30,15 @@ const initialPositionValue: Geolocation.GeoPosition = {
   provider: 'passive',
 };
 
+const width = Dimensions.get('screen').width / 1;
+
 const HomeContainer: FC = () => {
   const { setOptions } = useNavigation();
 
   const [myPosition, setMyPosition] =
     useState<Geolocation.GeoPosition>(initialPositionValue);
   const [listBreweries, setListBreweries] = useState<Array<Brewerie>>([]);
-  const [widthMapCard, setWidthMapCard] = useState(0);
+  const [widthMapCard] = useState(width);
   const [loading, setLoading] = useState(false);
   const [searchValue, setSearchValue] = useState('');
   const [initialized, setInitialized] = useState(false);
@@ -182,7 +184,6 @@ const HomeContainer: FC = () => {
       initialized={initialized}
       listBreweries={listBreweries}
       animatedEvent={animatedEvent}
-      setWidthMapCard={setWidthMapCard}
       getBreweriesNearMe={getBreweriesNearMe}
       widthMapCard={widthMapCard}
       animation={animation}
