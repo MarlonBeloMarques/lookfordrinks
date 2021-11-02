@@ -29,6 +29,7 @@ module.exports = {
     'react/jsx-filename-extension': ['error', {extensions: ['.jsx', '.tsx']}],
     'react/prop-types': 0,
     'react/display-name': 0,
+    "@typescript-eslint/no-unused-vars": ["error"],
     '@typescript-eslint/member-delimiter-style': 0,
     '@typescript-eslint/no-empty-function': 0,
     '@typescript-eslint/no-explicit-any': 0,
