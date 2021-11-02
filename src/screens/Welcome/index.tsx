@@ -9,6 +9,7 @@ import {
   useSharedValue,
   withTiming,
 } from 'react-native-reanimated';
+import { useIsFocused } from '@react-navigation/core';
 import Welcome from './Welcome';
 
 const WelcomeContainer: FC = () => {
@@ -28,6 +29,8 @@ const WelcomeContainer: FC = () => {
   const descriptionAnimation = useSharedValue(100);
   const buttonAnimation = useSharedValue(100);
 
+  const isFocused = useIsFocused();
+
   /** style */
   const titleStyle = useAnimatedStyle(() => {
     return {
@@ -45,6 +48,14 @@ const WelcomeContainer: FC = () => {
       transform: [{ translateX: buttonAnimation.value }],
     };
   });
+
+  useEffect(() => {
+    if (!isFocused) {
+      setTimeout(() => {
+        setOpenTransition(false);
+      }, 1000);
+    }
+  }, [isFocused]);
 
   useEffect(() => {
     setTimeout(() => {
