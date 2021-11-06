@@ -25,11 +25,11 @@ type Props = {
 };
 
 const MapCard: FC<Props> = ({
-  title = 'MadTree Brewing',
-  state = 'United States',
-  city = 'Ohio, Cincinnati',
-  address = '3301 Madison Rd',
-  phone = '5138368733',
+  title,
+  state,
+  city,
+  address,
+  phone,
   distance = '9 KM',
   onPress,
 }) => {
@@ -48,21 +48,28 @@ const MapCard: FC<Props> = ({
                 size={24}
               />
             </Block>
-            <Block flex={false}>
-              <City>{city},</City>
-              <Address>{address}</Address>
+            <Block middle flex={false}>
+              <City>
+                {city}
+                {address && ','}
+              </City>
+              {address && <Address>{address}</Address>}
             </Block>
           </Block>
           <Block flex={false} row>
-            <Block center middle width={30} flex={false}>
-              <Icon
-                name="local-phone"
-                fontFamily="MaterialIcons"
-                color="text"
-                size={14}
-              />
-            </Block>
-            <Phone>{phone}</Phone>
+            {phone && (
+              <>
+                <Block center middle width={30} flex={false}>
+                  <Icon
+                    name="local-phone"
+                    fontFamily="MaterialIcons"
+                    color="text"
+                    size={14}
+                  />
+                </Block>
+                <Phone>{phone}</Phone>
+              </>
+            )}
           </Block>
         </DetailContainer>
         <DistanceContainer>
