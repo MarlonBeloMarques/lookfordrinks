@@ -1,5 +1,7 @@
 import React, { FC } from 'react';
 import Animated from 'react-native-reanimated';
+import phoneCall from 'react-native-phone-call';
+import { useAlerts } from '~/utils';
 import MapCard from '../MapCard';
 import Block from '../Block';
 
@@ -10,6 +12,22 @@ type Props = {
 };
 
 const MapCardList: FC<Props> = ({ listBreweries, onScroll, width }) => {
+  const { showWarning } = useAlerts();
+
+  const callTheBrewery = (numberCall: string) => {
+    const phoneCallContent = {
+      number: numberCall,
+      prompt: false,
+    };
+
+    if (numberCall) {
+      // eslint-disable-next-line promise/prefer-await-to-then
+      phoneCall(phoneCallContent).catch((err: Error) => console.log(err));
+    } else {
+      showWarning("We can't find the number to contact you.");
+    }
+  };
+
   return (
     <Animated.ScrollView
       horizontal
@@ -35,7 +53,9 @@ const MapCardList: FC<Props> = ({ listBreweries, onScroll, width }) => {
             city={item.city}
             phone={item.phone}
             distance="9 KM"
-            onPress={() => {}}
+            onPress={() => {
+              callTheBrewery(item.phone);
+            }}
           />
         </Block>
       ))}
