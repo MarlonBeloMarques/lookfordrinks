@@ -1,4 +1,11 @@
-import React, { FC, useEffect, useLayoutEffect, useRef, useState } from 'react';
+import React, {
+  FC,
+  useCallback,
+  useEffect,
+  useLayoutEffect,
+  useRef,
+  useState,
+} from 'react';
 import { Alert, Dimensions } from 'react-native';
 import Geolocation from 'react-native-geolocation-service';
 import MapView from 'react-native-maps';
@@ -139,9 +146,9 @@ const HomeContainer: FC = () => {
     }
   };
 
-  const getBreweriesNearMe = async () => {
+  const getBreweriesNearMe = useCallback(async () => {
     await Promise.all([getLocation(), getListBreweries()]);
-  };
+  }, [myPosition, listBreweries]);
 
   useEffect(() => {
     debouncedSearch.length !== 0 && searchBreweries(debouncedSearch);

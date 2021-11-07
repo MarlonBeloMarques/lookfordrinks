@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, useMemo } from 'react';
 import { LayoutChangeEvent, StyleProp, ViewStyle } from 'react-native';
 import { Block, Button, Text, TransitionalModal } from '~/components';
 import { NavigationActions } from '~/navigation';
@@ -56,10 +56,15 @@ const Welcome: FC<Props> = ({
           )}
         </Block>
         <Block center middle zIndex={10}>
-          <Beer
-            progress={beerProgress}
-            style={{ width: beerSize, height: beerSize }}
-          />
+          {useMemo(
+            () => (
+              <Beer
+                progress={beerProgress}
+                style={{ width: beerSize, height: beerSize }}
+              />
+            ),
+            [beerProgress, beerSize],
+          )}
         </Block>
         <Block onLayout={onLayout} flex={0.3}>
           {showDescription && (

@@ -1,4 +1,4 @@
-import React, { FC, LegacyRef } from 'react';
+import React, { FC, LegacyRef, useMemo } from 'react';
 import MapView, { Marker } from 'react-native-maps';
 import Geolocation from 'react-native-geolocation-service';
 import Animated, {
@@ -40,6 +40,8 @@ const Home: FC<Props> = ({
   widthMapCard,
   getBreweriesNearMe,
 }) => {
+  const showList = !loading && listBreweries.length !== 0;
+
   const renderMarkerBreweries = () => {
     return listBreweries.map((brewerie, index) => {
       const scaleStyle = useAnimatedStyle(() => {
@@ -132,15 +134,19 @@ const Home: FC<Props> = ({
             title="Your real-time location"
           />
         )}
-        {!loading && listBreweries.length !== 0 && renderMarkerBreweries()}
+        {showList && renderMarkerBreweries()}
       </MapView>
-      {!loading && (
-        <MapCardList
-          listBreweries={listBreweries}
-          onScroll={animatedEvent}
-          width={widthMapCard}
-        />
-      )}
+      {showList &&
+        useMemo(
+          () => (
+            <MapCardList
+              listBreweries={listBreweries}
+              onScroll={animatedEvent}
+              width={widthMapCard}
+            />
+          ),
+          [listBreweries],
+        )}
     </Block>
   );
 };
