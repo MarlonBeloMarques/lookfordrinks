@@ -18,6 +18,7 @@ import {
 type Props = {
   position: Geolocation.GeoPosition;
   loading: boolean;
+  isConnected: boolean;
   initialized: boolean;
   listBreweries: Array<Brewerie>;
   mapViewRef: LegacyRef<MapView>;
@@ -30,6 +31,7 @@ type Props = {
 const Home: FC<Props> = ({
   position,
   loading,
+  isConnected,
   initialized,
   listBreweries,
   mapViewRef,
@@ -101,7 +103,12 @@ const Home: FC<Props> = ({
 
   return (
     <Block>
-      {loading && <Loading />}
+      {loading && (
+        <Loading
+          isNoConnection={!isConnected}
+          tryAgain={() => getBreweriesNearMe()}
+        />
+      )}
       <NearMeButton onPress={() => getBreweriesNearMe()}>
         <WrapperNearMe>
           <NearMeIcon />

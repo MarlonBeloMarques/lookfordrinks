@@ -405,6 +405,8 @@ PODS:
     - React-Core
   - react-native-maps (0.29.3):
     - React-Core
+  - react-native-netinfo (6.0.6):
+    - React-Core
   - react-native-safe-area-context (3.3.2):
     - React-Core
   - react-native-splash-screen (3.2.0):
@@ -574,6 +576,7 @@ DEPENDENCIES:
   - react-native-geolocation-service (from `../node_modules/react-native-geolocation-service`)
   - react-native-google-maps (from `../node_modules/react-native-maps`)
   - react-native-maps (from `../node_modules/react-native-maps`)
+  - "react-native-netinfo (from `../node_modules/@react-native-community/netinfo`)"
   - react-native-safe-area-context (from `../node_modules/react-native-safe-area-context`)
   - react-native-splash-screen (from `../node_modules/react-native-splash-screen`)
   - React-perflogger (from `../node_modules/react-native/ReactCommon/reactperflogger`)
@@ -677,6 +680,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native-maps"
   react-native-maps:
     :path: "../node_modules/react-native-maps"
+  react-native-netinfo:
+    :path: "../node_modules/@react-native-community/netinfo"
   react-native-safe-area-context:
     :path: "../node_modules/react-native-safe-area-context"
   react-native-splash-screen:
@@ -776,6 +781,7 @@ SPEC CHECKSUMS:
   react-native-geolocation-service: 32e50a2e4e4518b51b829fdfe137562a672d95d2
   react-native-google-maps: d6a30377b40a338bd09d6ad36ce48dc5d12b5792
   react-native-maps: 41d01d8e0afcebe32bec9eea3bd945adc1b18f7a
+  react-native-netinfo: 40b91995cd49c33ae57996486db76f0af067b630
   react-native-safe-area-context: 584dc04881deb49474363f3be89e4ca0e854c057
   react-native-splash-screen: 200d11d188e2e78cea3ad319964f6142b6384865
   React-perflogger: fd28ee1f2b5b150b00043f0301d96bd417fdc339

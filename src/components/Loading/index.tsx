@@ -1,15 +1,30 @@
 import React, { FC } from 'react';
 import { ActivityIndicator, Dimensions } from 'react-native';
+
 import { getColors } from '~/utils';
 import Block from '../Block';
+import Text from '../Text';
+import { NoConnection, TryAgainButton } from './styles';
 
 const width = Dimensions.get('screen').width;
 const height = Dimensions.get('screen').height;
 
-const Loading: FC = () => {
+type Props = {
+  isNoConnection?: boolean;
+  tryAgain?: () => void;
+};
+
+const Loading: FC<Props> = ({
+  isNoConnection = false,
+  tryAgain = () => {},
+}) => {
   return (
     <Block
-      style={{ backgroundColor: 'rgba(255,255,255,0.6)' }}
+      style={{
+        backgroundColor: isNoConnection
+          ? getColors('white')
+          : 'rgba(255,255,255,0.6)',
+      }}
       center
       middle
       zIndex={100}
@@ -17,7 +32,15 @@ const Loading: FC = () => {
       width={width}
       height={height}
     >
-      <ActivityIndicator size="large" color={getColors('text')} />
+      {isNoConnection ? (
+        <>
+          <NoConnection />
+          <Text>There was a problem fetching the breweries</Text>
+          <TryAgainButton onPress={tryAgain}>try again</TryAgainButton>
+        </>
+      ) : (
+        <ActivityIndicator size="large" color={getColors('text')} />
+      )}
     </Block>
   );
 };

@@ -8,6 +8,7 @@ import {
   useDerivedValue,
   useSharedValue,
 } from 'react-native-reanimated';
+import NetInfo from '@react-native-community/netinfo';
 import { BreweriesApi } from '~/api';
 import { Search } from '~/components';
 import { useNavigation } from '~/navigation';
@@ -40,6 +41,7 @@ const HomeContainer: FC = () => {
   const [listBreweries, setListBreweries] = useState<Array<Brewerie>>([]);
   const [widthMapCard] = useState(width);
   const [loading, setLoading] = useState(false);
+  const [connected, setConnected] = useState(true);
   const [searchValue, setSearchValue] = useState('');
   const [initialized, setInitialized] = useState(false);
 
@@ -63,17 +65,26 @@ const HomeContainer: FC = () => {
     }
   };
 
+  const getIsConnected = async (): Promise<boolean> => {
+    const { isConnected } = await NetInfo.fetch();
+    return !!isConnected;
+  };
+
   useLayoutEffect(() => {
     setOptions({
-      headerRight: () => (
-        <Search
-          disabled={loading}
-          value={searchValue}
-          onChangeText={setSearchValue}
-        />
-      ),
+      headerRight: () => {
+        return connected ? (
+          <Search
+            disabled={loading}
+            value={searchValue}
+            onChangeText={setSearchValue}
+          />
+        ) : (
+          <></>
+        );
+      },
     });
-  }, [useNavigation, searchValue]);
+  }, [useNavigation, searchValue, loading, connected]);
 
   useDerivedValue(() => {
     let index = Math.floor(animation.value / widthMapCard + 0.3);
@@ -93,15 +104,25 @@ const HomeContainer: FC = () => {
   }, []);
 
   const treatsListBreweries = (listBreweries: Array<Brewerie>) => {
-    const treatd = listBreweries.filter(
+    const treated = listBreweries.filter(
       (brewery) => brewery.latitude && brewery.longitude,
     );
 
-    setListBreweries(treatd);
+    setListBreweries(treated);
   };
 
   const getListBreweries = async () => {
+    let isConnected = false;
     try {
+      setLoading(true);
+
+      isConnected = await getIsConnected();
+      setConnected(isConnected);
+
+      if (!isConnected) {
+        return;
+      }
+
       const {
         coords: { latitude, longitude },
       } = myPosition;
@@ -113,14 +134,13 @@ const HomeContainer: FC = () => {
       treatsListBreweries(data);
     } catch (error) {
     } finally {
+      isConnected && setLoading(false);
       !initialized && setInitialized(true);
     }
   };
 
   const getBreweriesNearMe = async () => {
-    setLoading(true);
-    await getListBreweries();
-    setLoading(false);
+    await Promise.all([getLocation(), getListBreweries()]);
   };
 
   useEffect(() => {
@@ -128,14 +148,23 @@ const HomeContainer: FC = () => {
   }, [debouncedSearch]);
 
   const searchBreweries = async (value: string) => {
+    let isConnected = false;
     try {
       setLoading(true);
+
+      isConnected = await getIsConnected();
+      setConnected(isConnected);
+
+      if (!isConnected) {
+        return;
+      }
+
       const data = await BreweriesApi.searchBreweries(value);
 
       treatsListBreweries(data);
     } catch (error) {
     } finally {
-      setLoading(false);
+      isConnected && setLoading(false);
     }
   };
 
@@ -144,6 +173,13 @@ const HomeContainer: FC = () => {
       const hasPermission = await hasLocationPermission();
 
       if (!hasPermission) {
+        return;
+      }
+
+      const isConnected = await getIsConnected();
+      setConnected(isConnected);
+
+      if (!isConnected) {
         return;
       }
 
@@ -181,6 +217,7 @@ const HomeContainer: FC = () => {
       mapViewRef={mapViewRef}
       position={myPosition}
       loading={loading}
+      isConnected={connected}
       initialized={initialized}
       listBreweries={listBreweries}
       animatedEvent={animatedEvent}
