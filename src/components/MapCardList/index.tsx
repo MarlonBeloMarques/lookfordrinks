@@ -30,6 +30,7 @@ const MapCardList: FC<Props> = ({ listBreweries, onScroll, width }) => {
 
   return (
     <Animated.ScrollView
+      testID="mapCardList_id"
       horizontal
       pagingEnabled
       scrollEnabled
