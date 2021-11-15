@@ -38,6 +38,7 @@
     "axios": "^0.21.4",
     "cz-conventional-changelog": "^3.3.0",
     "formik": "^2.2.9",
+    "geolib": "^3.3.3",
     "jest-circus": "^27.1.1",
     "lottie-ios": "3.2.3",
     "lottie-react-native": "^4.1.3",

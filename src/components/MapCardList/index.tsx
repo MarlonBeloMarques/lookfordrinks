@@ -1,17 +1,29 @@
 import React, { FC } from 'react';
 import Animated from 'react-native-reanimated';
 import phoneCall from 'react-native-phone-call';
+import { getDistance } from 'geolib';
 import { useAlerts } from '~/utils';
 import MapCard from '../MapCard';
 import Block from '../Block';
 
+type Coordinates = {
+  latitude: number;
+  longitude: number;
+};
+
 type Props = {
   listBreweries: Array<Brewerie>;
+  myPosition: Coordinates;
   onScroll: any;
   width: number;
 };
 
-const MapCardList: FC<Props> = ({ listBreweries, onScroll, width }) => {
+const MapCardList: FC<Props> = ({
+  listBreweries,
+  myPosition,
+  onScroll,
+  width,
+}) => {
   const { showWarning } = useAlerts();
 
   const callTheBrewery = (numberCall: string) => {
@@ -26,6 +38,24 @@ const MapCardList: FC<Props> = ({ listBreweries, onScroll, width }) => {
     } else {
       showWarning("We can't find the number to contact you.");
     }
+  };
+
+  const getMyDistanceToBrewery = (
+    start: Coordinates,
+    end: Coordinates,
+  ): string => {
+    const distanceInM = getDistance(start, end);
+    if (distanceInM.toString().length < 4) {
+      return `${distanceInM} M`;
+    }
+
+    let distanceInKm = distanceInM ? distanceInM / 1000 : 0;
+
+    if (distanceInKm.toString().length > 4) {
+      distanceInKm = parseInt(distanceInKm.toString().split('.')[0]);
+    }
+
+    return `${distanceInKm} KM`;
   };
 
   return (
@@ -53,7 +83,10 @@ const MapCardList: FC<Props> = ({ listBreweries, onScroll, width }) => {
             address={item.street}
             city={item.city}
             phone={item.phone}
-            distance="9 KM"
+            distance={getMyDistanceToBrewery(myPosition, {
+              latitude: Number.parseFloat(item.latitude),
+              longitude: Number.parseFloat(item.longitude),
+            })}
             onPress={() => {
               callTheBrewery(item.phone);
             }}

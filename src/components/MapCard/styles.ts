@@ -30,12 +30,12 @@ export const State = styled(Text).attrs({
 })``;
 
 export const DetailContainer = styled(Block)`
-  flex: 0.6;
+  flex: 0.5;
   justify-content: space-around;
 `;
 
 export const DistanceContainer = styled(Block)`
-  flex: 0.4;
+  flex: 0.5;
   align-items: flex-end;
 `;
 

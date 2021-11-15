@@ -6,7 +6,13 @@ import BreweriesList from './fixtures/breweriesList';
 type _Brewerie = typeof BreweriesList[0] & Brewerie;
 
 const makeMocks = () => {
-  return BreweriesList as Array<_Brewerie>;
+  return {
+    listBreweries: BreweriesList as Array<_Brewerie>,
+    myPosition: {
+      latitude: 0,
+      longitude: 0,
+    },
+  };
 };
 
 describe('Component: MapCardList', () => {
@@ -15,7 +21,8 @@ describe('Component: MapCardList', () => {
     const onScrollMock = jest.fn();
     const { getByTestId } = render(
       <MapCardList
-        listBreweries={makeMocks()}
+        listBreweries={makeMocks().listBreweries}
+        myPosition={makeMocks().myPosition}
         onScroll={onScrollMock}
         width={500}
       />,
