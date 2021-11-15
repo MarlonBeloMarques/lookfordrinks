@@ -42,6 +42,7 @@ const Search: FC<Props> = ({ value, disabled = false, onChangeText }) => {
         />
       </Block>
       <Input
+        id="search_id"
         disabled={!disabled}
         placeholder="search for a brewery"
         value={value}
