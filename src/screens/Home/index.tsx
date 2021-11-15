@@ -27,8 +27,8 @@ const initialPositionValue: Geolocation.GeoPosition = {
   coords: {
     accuracy: 0,
     altitude: 0,
-    latitude: 37.78825,
-    longitude: -122.4324,
+    latitude: 0,
+    longitude: 0,
     heading: null,
     speed: null,
     altitudeAccuracy: null,
@@ -106,8 +106,7 @@ const HomeContainer: FC = () => {
   }, [animation, listBreweries]);
 
   useEffect(() => {
-    getLocation();
-    getListBreweries();
+    getListBreweriesByMyLocation();
   }, []);
 
   const treatsListBreweries = (listBreweries: Array<Brewerie>) => {
@@ -118,7 +117,7 @@ const HomeContainer: FC = () => {
     setListBreweries(treated);
   };
 
-  const getListBreweries = async () => {
+  const getListBreweries = async (latitude: number, longitude: number) => {
     let isConnected = false;
     try {
       setLoading(true);
@@ -130,9 +129,6 @@ const HomeContainer: FC = () => {
         return;
       }
 
-      const {
-        coords: { latitude, longitude },
-      } = myPosition;
       const data = await BreweriesApi.listBreweriesByDistance(
         latitude,
         longitude,
@@ -147,7 +143,7 @@ const HomeContainer: FC = () => {
   };
 
   const getBreweriesNearMe = useCallback(async () => {
-    await Promise.all([getLocation(), getListBreweries()]);
+    getListBreweriesByMyLocation();
   }, [myPosition, listBreweries]);
 
   useEffect(() => {
@@ -175,7 +171,7 @@ const HomeContainer: FC = () => {
     }
   };
 
-  const getLocation = async () => {
+  const getListBreweriesByMyLocation = async () => {
     try {
       const hasPermission = await hasLocationPermission();
 
@@ -194,6 +190,7 @@ const HomeContainer: FC = () => {
         (position) => {
           console.log(position);
           setMyPosition(position);
+          getListBreweries(position.coords.latitude, position.coords.longitude);
         },
         (error) => {
           Alert.alert(`Code ${error.code}`, error.message);
@@ -215,6 +212,9 @@ const HomeContainer: FC = () => {
     }
   };
 
+  const positioIsEmpty = () =>
+    myPosition.coords.latitude === 0 && myPosition.coords.longitude === 0;
+
   const animatedEvent = useAnimatedScrollHandler((event) => {
     animation.value = event.contentOffset.x;
   });
@@ -223,6 +223,7 @@ const HomeContainer: FC = () => {
     <Home
       mapViewRef={mapViewRef}
       position={myPosition}
+      positioIsEmpty={positioIsEmpty()}
       loading={loading}
       isConnected={connected}
       initialized={initialized}

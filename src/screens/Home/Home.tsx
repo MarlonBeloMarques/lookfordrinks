@@ -17,6 +17,7 @@ import {
 
 type Props = {
   position: Geolocation.GeoPosition;
+  positioIsEmpty: boolean;
   loading: boolean;
   isConnected: boolean;
   initialized: boolean;
@@ -30,6 +31,7 @@ type Props = {
 
 const Home: FC<Props> = ({
   position,
+  positioIsEmpty,
   loading,
   isConnected,
   initialized,
@@ -91,6 +93,15 @@ const Home: FC<Props> = ({
     return Number.parseFloat(listBreweries[0].longitude);
   };
 
+  const getInitialRegion = () => {
+    return {
+      latitude: getInitialRegionLatitude(),
+      longitude: getInitialRegionLongitude(),
+      latitudeDelta: 0.02,
+      longitudeDelta: 0.02,
+    };
+  };
+
   const renderNotFound = () => {
     if (!loading && listBreweries.length === 0 && initialized) {
       return (
@@ -121,14 +132,9 @@ const Home: FC<Props> = ({
         ref={mapViewRef}
         testID="mapView"
         style={{ flex: 1 }}
-        initialRegion={{
-          latitude: getInitialRegionLatitude(),
-          longitude: getInitialRegionLongitude(),
-          latitudeDelta: 0.02,
-          longitudeDelta: 0.02,
-        }}
+        initialRegion={!positioIsEmpty ? getInitialRegion() : undefined}
       >
-        {position && (
+        {!positioIsEmpty && (
           <Marker
             coordinate={position.coords}
             title="Your real-time location"
@@ -143,6 +149,10 @@ const Home: FC<Props> = ({
               listBreweries={listBreweries}
               onScroll={animatedEvent}
               width={widthMapCard}
+              myPosition={{
+                latitude: position.coords.latitude,
+                longitude: position.coords.longitude,
+              }}
             />
           ),
           [listBreweries],
