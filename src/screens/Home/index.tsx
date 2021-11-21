@@ -6,7 +6,7 @@ import React, {
   useRef,
   useState,
 } from 'react';
-import { Alert, Dimensions } from 'react-native';
+import { Dimensions } from 'react-native';
 import Geolocation from 'react-native-geolocation-service';
 import MapView from 'react-native-maps';
 import {
@@ -19,7 +19,7 @@ import NetInfo from '@react-native-community/netinfo';
 import { BreweriesApi } from '~/api';
 import { Search } from '~/components';
 import { useNavigation } from '~/navigation';
-import { useDebounce } from '~/utils';
+import { useAlerts, useDebounce } from '~/utils';
 import Home from './Home';
 import { hasLocationPermission } from './permissions';
 
@@ -42,6 +42,7 @@ const width = Dimensions.get('screen').width / 1;
 
 const HomeContainer: FC = () => {
   const { setOptions } = useNavigation();
+  const { showWarning } = useAlerts();
 
   const [myPosition, setMyPosition] =
     useState<Geolocation.GeoPosition>(initialPositionValue);
@@ -193,8 +194,18 @@ const HomeContainer: FC = () => {
           getListBreweries(position.coords.latitude, position.coords.longitude);
         },
         (error) => {
-          Alert.alert(`Code ${error.code}`, error.message);
+          showWarning(
+            'There was an error getting your location.',
+            'We will use a default location, try again later.',
+          );
           console.log(error);
+          initialPositionValue.coords.latitude = 37.78825;
+          initialPositionValue.coords.longitude = -122.4324;
+          setMyPosition(initialPositionValue);
+          getListBreweries(
+            initialPositionValue.coords.latitude,
+            initialPositionValue.coords.longitude,
+          );
         },
         {
           accuracy: {
