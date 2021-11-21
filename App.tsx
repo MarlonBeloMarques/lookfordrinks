@@ -27,6 +27,9 @@ const codePushOptions: CodePushOptions = {
   checkFrequency: codePush.CheckFrequency.ON_APP_RESUME,
 };
 
+// TODO: recommended to use for e2e tests in dev environment.
+// LogBox.ignoreAllLogs(true);
+
 const App = () => {
   useEffect(() => {
     SplashScreen.hide();
