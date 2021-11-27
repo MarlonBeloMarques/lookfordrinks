@@ -9,10 +9,10 @@ describe('Welcome flow', () => {
   });
 
   test('should click the button and show transition animation', async () => {
-    await waitFor(element(by.text('LETS GO'))).toExist()
+    await waitFor(element(by.text('LETS GO'))).toBeVisible()
 
     await element(by.text('LETS GO')).tap();
 
-    await waitFor(element(by.text('LETS GO'))).not.toExist();
+    await waitFor(element(by.text('LETS GO'))).not.toBeVisible();
   });
 });

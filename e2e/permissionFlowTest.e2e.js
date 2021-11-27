@@ -7,11 +7,11 @@ describe('Permission flow', () => {
       },
     });
 
-    await waitFor(element(by.text('LETS GO'))).toExist();
+    await waitFor(element(by.text('LETS GO'))).toBeVisible();
 
     await element(by.text('LETS GO')).tap();
 
-    await waitFor(element(by.text('LETS GO'))).not.toExist();
+    await waitFor(element(by.text('LETS GO'))).not.toBeVisible();
 
     await waitFor(element(by.id('mapCardList_id'))).toBeVisible();
   });
@@ -24,11 +24,11 @@ describe('Permission flow', () => {
       },
     });
 
-    await waitFor(element(by.text('LETS GO'))).toExist();
+    await waitFor(element(by.text('LETS GO'))).toBeVisible();
 
     await element(by.text('LETS GO')).tap();
 
-    await waitFor(element(by.text('LETS GO'))).not.toExist();
+    await waitFor(element(by.text('LETS GO'))).not.toBeVisible();
 
     await waitFor(element(by.id('mapCardList_id'))).not.toBeVisible();
   });
