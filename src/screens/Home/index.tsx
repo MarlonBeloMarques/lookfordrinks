@@ -144,7 +144,7 @@ const HomeContainer: FC = () => {
   };
 
   const getBreweriesNearMe = useCallback(async () => {
-    getListBreweriesByMyLocation();
+    getListBreweriesByMyLocation(true);
   }, [myPosition, listBreweries]);
 
   useEffect(() => {
@@ -172,7 +172,7 @@ const HomeContainer: FC = () => {
     }
   };
 
-  const getListBreweriesByMyLocation = async () => {
+  const getListBreweriesByMyLocation = async (isUsedNearMe = false) => {
     try {
       const hasPermission = await hasLocationPermission();
 
@@ -199,9 +199,13 @@ const HomeContainer: FC = () => {
             'We will use a default location, try again later.',
           );
           console.log(error);
-          initialPositionValue.coords.latitude = 37.78825;
-          initialPositionValue.coords.longitude = -122.4324;
+          if (!isUsedNearMe) {
+            initialPositionValue.coords.latitude = 37.78825;
+            initialPositionValue.coords.longitude = -122.4324;
+          }
           setMyPosition(initialPositionValue);
+
+          console.log(initialPositionValue);
           getListBreweries(
             initialPositionValue.coords.latitude,
             initialPositionValue.coords.longitude,
