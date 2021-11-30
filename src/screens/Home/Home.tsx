@@ -65,7 +65,7 @@ const Home: FC<Props> = ({
 
       return (
         <Marker
-          testID="marker_id"
+          testID={`marker_${index}_id`}
           key={index}
           coordinate={{
             latitude: Number.parseFloat(brewerie.latitude),

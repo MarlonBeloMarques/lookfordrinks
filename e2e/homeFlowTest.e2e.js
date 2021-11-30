@@ -21,7 +21,7 @@ describe('Home flow', () => {
 
     await element(by.id('search_id')).typeText('Brazil');
 
-    await waitFor(element(by.id('marker_id')))
+    await waitFor(element(by.id('marker_0_id')))
       .toBeVisible()
       .withTimeout(5000);
   });
@@ -35,5 +35,24 @@ describe('Home flow', () => {
     await waitFor(element(by.text('Not found breweries')))
       .toBeVisible()
       .withTimeout(5000);
+  });
+
+  test('must scroll the map card', async () => {
+    await expect(element(by.id('search_id'))).toBeVisible();
+
+    await element(by.id('search_id')).clearText();
+    await element(by.id('search_id')).typeText('Burger');
+
+    await waitFor(element(by.id('marker_0_id')))
+      .toBeVisible()
+      .withTimeout(5000);
+
+    await expect(element(by.id('mapCardList_id'))).toBeVisible();
+
+    await element(by.id('mapCardList_id')).scroll(400, 'right');
+
+    await waitFor(element(by.id('marker_1_id')))
+      .toBeVisible()
+      .withTimeout(1000);
   });
 });
