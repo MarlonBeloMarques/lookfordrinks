@@ -6,6 +6,7 @@ import {
   ToastAndroid,
 } from 'react-native';
 import Geolocation from 'react-native-geolocation-service';
+import { AnalyticsService } from '~/services';
 
 const hasPermissionIOS = async () => {
   const openSetting = () => {
@@ -19,10 +20,12 @@ const hasPermissionIOS = async () => {
   const status = await Geolocation.requestAuthorization('whenInUse');
 
   if (status === 'granted') {
+    AnalyticsService.logEvent('permission:location', ['granted']);
     return true;
   }
 
   if (status === 'denied') {
+    AnalyticsService.logEvent('permission:location', ['denied']);
     Alert.alert('Location permission denied');
   }
 

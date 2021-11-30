@@ -3,6 +3,7 @@ import Animated from 'react-native-reanimated';
 import phoneCall from 'react-native-phone-call';
 import { getDistance } from 'geolib';
 import { useAlerts } from '~/utils';
+import { AnalyticsService, CrashlyticsService } from '~/services';
 import MapCard from '../MapCard';
 import Block from '../Block';
 
@@ -27,6 +28,7 @@ const MapCardList: FC<Props> = ({
   const { showWarning } = useAlerts();
 
   const callTheBrewery = (numberCall: string) => {
+    AnalyticsService.logEvent('call', [numberCall]);
     const phoneCallContent = {
       number: numberCall,
       prompt: false,
@@ -34,7 +36,9 @@ const MapCardList: FC<Props> = ({
 
     if (numberCall) {
       // eslint-disable-next-line promise/prefer-await-to-then
-      phoneCall(phoneCallContent).catch((err: Error) => console.log(err));
+      phoneCall(phoneCallContent).catch((err: Error) => {
+        CrashlyticsService.recordError(err), console.log(err);
+      });
     } else {
       showWarning("We can't find the number to contact you.");
     }

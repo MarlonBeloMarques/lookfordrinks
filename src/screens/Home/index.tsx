@@ -20,6 +20,7 @@ import { BreweriesApi } from '~/api';
 import { Search } from '~/components';
 import { useNavigation } from '~/navigation';
 import { useAlerts, useDebounce } from '~/utils';
+import { AnalyticsService, CrashlyticsService } from '~/services';
 import Home from './Home';
 import { hasLocationPermission } from './permissions';
 
@@ -137,6 +138,7 @@ const HomeContainer: FC = () => {
 
       treatsListBreweries(data);
     } catch (error) {
+      CrashlyticsService.recordError(error as Error);
     } finally {
       isConnected && setLoading(false);
       !initialized && setInitialized(true);
@@ -163,10 +165,12 @@ const HomeContainer: FC = () => {
         return;
       }
 
+      AnalyticsService.logSearch(`search_value:${value}`);
       const data = await BreweriesApi.searchBreweries(value);
 
       treatsListBreweries(data);
     } catch (error) {
+      CrashlyticsService.recordError(error as Error);
     } finally {
       isConnected && setLoading(false);
     }
@@ -189,11 +193,13 @@ const HomeContainer: FC = () => {
 
       Geolocation.getCurrentPosition(
         (position) => {
+          AnalyticsService.logEvent('location:myCurrentPosition', [position]);
           console.log(position);
           setMyPosition(position);
           getListBreweries(position.coords.latitude, position.coords.longitude);
         },
         (error) => {
+          CrashlyticsService.recordError(new Error(error.message));
           showWarning(
             'There was an error getting your location.',
             'We will use a default location, try again later.',
@@ -202,6 +208,9 @@ const HomeContainer: FC = () => {
           if (!isUsedNearMe) {
             initialPositionValue.coords.latitude = 37.78825;
             initialPositionValue.coords.longitude = -122.4324;
+            AnalyticsService.logEvent('location:initialPositionValue', [
+              initialPositionValue,
+            ]);
           }
           setMyPosition(initialPositionValue);
 
@@ -224,6 +233,7 @@ const HomeContainer: FC = () => {
       );
     } catch (error) {
       console.log(error);
+      CrashlyticsService.recordError(error as Error);
     }
   };
 
