@@ -1,4 +1,4 @@
-app_identifier("org.reactjs.native.example.LookForDrinks") # The bundle identifier of your app
+app_identifier("com.marlonmarques.lookfordrinks") # The bundle identifier of your app
 apple_id("marlon.belohd@gmail.com") # Your Apple email address
 
 itc_team_id("") # App Store Connect Team ID

@@ -19,6 +19,13 @@ platform :ios do
   desc "Push a new beta build to TestFlight"
   lane :beta do
     increment_build_number(xcodeproj: "LookForDrinks.xcodeproj")
+    build_app(workspace: "LookForDrinks.xcworkspace", scheme: "LookForDrinksDev")
+    upload_to_testflight
+  end
+
+  desc "Push a new release build to TestFlight"
+  lane :release do
+    increment_build_number(xcodeproj: "LookForDrinks.xcodeproj")
     build_app(workspace: "LookForDrinks.xcworkspace", scheme: "LookForDrinksProd")
     upload_to_testflight
   end
