@@ -30,3 +30,10 @@ export const SceneWrapper = styled(Block).attrs({})`
   margin-right: ${sceneSpacing}px;
   margin-bottom: ${baseSpacing}px;
 `;
+
+export const Environment = styled(Text).attrs({
+  color: 'primary',
+  weight: 'bold',
+  align: 'left',
+  variant: 'caption2',
+})``;

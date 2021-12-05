@@ -2,7 +2,8 @@ import React, { FC, useMemo } from 'react';
 import { LayoutChangeEvent, StyleProp, ViewStyle } from 'react-native';
 import { Block, Button, Text, TransitionalModal } from '~/components';
 import { NavigationActions } from '~/navigation';
-import { Beer, SceneWrapper, Title } from './styles';
+import { Env, getLabelVersion } from '~/utils';
+import { Beer, Environment, SceneWrapper, Title } from './styles';
 
 type Props = {
   beerProgress: number;
@@ -37,6 +38,9 @@ const Welcome: FC<Props> = ({
     setInitialPosTransitionalY(e.nativeEvent.layout.y / 2);
   };
 
+  const renderEnvironment = () =>
+    Env.ENV === 'DEV' ? <Environment>{getLabelVersion()}</Environment> : <></>;
+
   return (
     <Block>
       {openTransition && (
@@ -52,6 +56,7 @@ const Welcome: FC<Props> = ({
               <Title>LOOK</Title>
               <Title>FOR</Title>
               <Title color="primary">DRINKS</Title>
+              {renderEnvironment()}
             </Block>
           )}
         </Block>
