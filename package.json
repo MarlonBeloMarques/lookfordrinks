@@ -16,7 +16,9 @@
     "prepare": "husky install",
     "precommit": "lint-staged",
     "detox:ios": "yarn start & (detox build --configuration ios.debug && detox test --configuration ios.debug)",
-    "detox:android": "yarn start & (detox build --configuration android.debug && detox test --configuration android.debug)"
+    "detox:android": "yarn start & (detox build --configuration android.debug && detox test --configuration android.debug)",
+    "fastlane:ios:release": "cd ios && bundle exec fastlane ios release",
+    "fastlane:ios:beta": "cd ios && bundle exec fastlane ios beta"
   },
   "lint-staged": {
     "**/*.ts?(x)": [
