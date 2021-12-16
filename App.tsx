@@ -40,7 +40,11 @@ const App = () => {
     <Provider {...store}>
       <Block>
         <ThemeProvider theme={theme}>
-          <StatusBar barStyle="dark-content" />
+          <StatusBar
+            barStyle="dark-content"
+            translucent
+            backgroundColor="transparent"
+          />
           <ToastMessage position="top" />
           <CodePush />
           <Navigation
