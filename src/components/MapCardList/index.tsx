@@ -35,7 +35,7 @@ const MapCardList: FC<Props> = ({
   const topCardMap = screenHeight - mapCardHeight - getStatusBarHeight();
 
   const callTheBrewery = (numberCall: string) => {
-    AnalyticsService.logEvent('call', [numberCall]);
+    AnalyticsService.logEvent('call', { numberCall });
     const phoneCallContent = {
       number: numberCall,
       prompt: false,

@@ -20,12 +20,12 @@ const hasPermissionIOS = async () => {
   const status = await Geolocation.requestAuthorization('whenInUse');
 
   if (status === 'granted') {
-    AnalyticsService.logEvent('permission:location', ['granted']);
+    AnalyticsService.logEvent('permission:location', { status: 'granted' });
     return true;
   }
 
   if (status === 'denied') {
-    AnalyticsService.logEvent('permission:location', ['denied']);
+    AnalyticsService.logEvent('permission:location', { status: 'denied' });
     Alert.alert('Location permission denied');
   }
 

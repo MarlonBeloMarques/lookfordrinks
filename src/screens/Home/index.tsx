@@ -193,7 +193,7 @@ const HomeContainer: FC = () => {
 
       Geolocation.getCurrentPosition(
         (position) => {
-          AnalyticsService.logEvent('location:myCurrentPosition', [position]);
+          AnalyticsService.logEvent('location:myCurrentPosition', { position });
           console.log(position);
           setMyPosition(position);
           getListBreweries(position.coords.latitude, position.coords.longitude);
@@ -208,9 +208,9 @@ const HomeContainer: FC = () => {
           if (!isUsedNearMe) {
             initialPositionValue.coords.latitude = 37.78825;
             initialPositionValue.coords.longitude = -122.4324;
-            AnalyticsService.logEvent('location:initialPositionValue', [
+            AnalyticsService.logEvent('location:initialPositionValue', {
               initialPositionValue,
-            ]);
+            });
           }
           setMyPosition(initialPositionValue);
 
