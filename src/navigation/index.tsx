@@ -95,6 +95,7 @@ export const Navigation: React.FC<Props> = ({ setNavigationTop }) => {
         />
         <MainStack.Screen
           options={{
+            headerMode: Platform.OS === 'ios' ? 'screen' : 'float',
             presentation: 'transparentModal',
           }}
           name={Routes.HOME}
