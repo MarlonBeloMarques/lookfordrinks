@@ -50,7 +50,7 @@ const Welcome: FC<Props> = ({
         />
       )}
       <SceneWrapper>
-        <Block flex={0.3}>
+        <Block flex={0.4}>
           {showTitle && (
             <Block animated flex={false} style={[{}, titleStyle]}>
               <Title>LOOK</Title>

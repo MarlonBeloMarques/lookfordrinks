@@ -2,6 +2,8 @@ import React, { FC } from 'react';
 import Animated from 'react-native-reanimated';
 import phoneCall from 'react-native-phone-call';
 import { getDistance } from 'geolib';
+import { Dimensions, Platform, StyleProp, ViewStyle } from 'react-native';
+import { getStatusBarHeight } from 'react-native-status-bar-height';
 import { useAlerts } from '~/utils';
 import { AnalyticsService, CrashlyticsService } from '~/services';
 import MapCard from '../MapCard';
@@ -19,6 +21,9 @@ type Props = {
   width: number;
 };
 
+const screenHeight = Dimensions.get('screen').height;
+const mapCardHeight = 260;
+
 const MapCardList: FC<Props> = ({
   listBreweries,
   myPosition,
@@ -26,6 +31,8 @@ const MapCardList: FC<Props> = ({
   width,
 }) => {
   const { showWarning } = useAlerts();
+
+  const topCardMap = screenHeight - mapCardHeight - getStatusBarHeight();
 
   const callTheBrewery = (numberCall: string) => {
     AnalyticsService.logEvent('call', [numberCall]);
@@ -62,6 +69,19 @@ const MapCardList: FC<Props> = ({
     return `${distanceInKm} KM`;
   };
 
+  const getStyleMapCardList = (): StyleProp<
+    Animated.AnimateStyle<StyleProp<ViewStyle>>
+  > => {
+    const style =
+      Platform.OS === 'ios'
+        ? { bottom: 0 }
+        : {
+            top: topCardMap,
+          };
+
+    return { position: 'absolute', ...style };
+  };
+
   return (
     <Animated.ScrollView
       testID="mapCardList_id"
@@ -70,7 +90,7 @@ const MapCardList: FC<Props> = ({
       scrollEnabled
       scrollEventThrottle={1}
       showsHorizontalScrollIndicator={false}
-      style={{ position: 'absolute', bottom: 0 }}
+      style={getStyleMapCardList()}
       onScroll={onScroll}
     >
       {listBreweries.map((item) => (

@@ -11,6 +11,7 @@ import { BeerMarker } from '~/assets/images';
 import {
   NearMeButton,
   NearMeIcon,
+  WrapperMarkerImage,
   WrapperNearMe,
   WrapperNotFound,
 } from './styles';
@@ -73,7 +74,9 @@ const Home: FC<Props> = ({
           }}
           title={brewerie.name}
         >
-          <Image animated source={BeerMarker} style={scaleStyle} />
+          <WrapperMarkerImage>
+            <Image animated source={BeerMarker} style={scaleStyle} />
+          </WrapperMarkerImage>
         </Marker>
       );
     });
@@ -123,11 +126,16 @@ const Home: FC<Props> = ({
           tryAgain={() => getBreweriesNearMe()}
         />
       )}
-      <NearMeButton onPress={() => getBreweriesNearMe()}>
-        <WrapperNearMe>
+      <WrapperNearMe>
+        <NearMeButton
+          onPress={() => {
+            getBreweriesNearMe();
+          }}
+        >
           <NearMeIcon />
-        </WrapperNearMe>
-      </NearMeButton>
+        </NearMeButton>
+      </WrapperNearMe>
+
       {renderNotFound()}
       <MapView
         ref={mapViewRef}
