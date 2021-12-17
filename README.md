@@ -1,15 +1,32 @@
 <h1 align="flex-start">
-Look For Drinks Template
+  Look For Drinks
+</h1>
   <p align="flex-start">
+    <a href="https://github.com/marlonbelomarques/lookfordrinks">
+      <img alt="lookfordrinks" src="./README/LookForDrinks.png" width="200px" />
+    </a>
+  </p>
+  <p>
     <a href="https://github.com/MarlonBeloMarques">
     <img alt="Made by Marlon Marques" src="https://img.shields.io/badge/made%20by-Marlon%20Marques-brightgreen">
     </a>
   </p>
-</h1>
 
-This is a template developed to serve as a basis for the look fo drinks project and also for future projects.
 
-> As this project has external dependencies, such as configurations etc. This README is intended to help you configure your template so that everything works correctly. Below you will find some of the features present in the architecture of this project.
+See the main bars and breweries near you, otherwise you can also search.
+
+----
+
+<p align="flex-start">
+    <img src="./README/LookForDrinks.gif" width="225" height="487" />
+    <img src="./README/WelcomeScreenShot.png" width="225" height="487" />
+    <img src="./README/HomeScreenShot_1.png" width="225" height="487" />
+    <img src="./README/HomeScreenShot_2.png" width="225" height="487" />
+</p>
+
+----
+
+> This README will cover a little about the main tools used as well as running LookForDrinks locally.
 
 - Assets
 - Services
@@ -77,6 +94,33 @@ yarn android
 yarn ios
 ```
 
+### Distribution
+
+If you want to distribute your app to stores, there are a few ways (*don't forget to have the environment set up*):
+
+#### Fastlane
+```
+yarn fastlane:ios:release
+```
+```
+yarn fastlane:ios:beta
+```
+
+#### Codepush
+```
+appcenter codepush release-react -t "1.0.0" -d Development
+```
+```
+appcenter codepush release-react -t "1.0.0" -d Production
+```
+
 ### Attention
 
 The other scripts, such as unit tests, e2e test etc. You can find it at **package.json**.
+
+## Contact
+
+You still have any doubts, or need to talk to me, you can find me here:
+
+- Instagram: [@marlonbelomarques](https://www.instagram.com/marlonbelomarques)
+- Linkedin: [Marlon Marques](https://www.linkedin.com/in/marlon-marques-0b509813b/)
